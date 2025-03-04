@@ -1,6 +1,5 @@
-import 'package:e_commerce_app/features/authentication/screens/login/login.dart';
-import 'package:e_commerce_app/features/authentication/screens/signup_verfication/email_verification.dart';
-import 'package:e_commerce_app/common/widgets/sucsess.dart';
+import 'package:e_commerce_app/features/authentication/controllers/signup_controller.dart';
+import 'package:e_commerce_app/utils/validators/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -12,7 +11,9 @@ class SignupForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SignupController());
     return Form(
+      key: controller.formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -24,6 +25,9 @@ class SignupForm extends StatelessWidget {
                     prefixIcon: Icon(Iconsax.user),
                     labelText: 'First Name',
                   ),
+                  validator: (value) =>
+                      Validator.validateEmptyField('FirstName', value),
+                  controller: controller.firstName,
                 ),
               ),
               SizedBox(width: 10),
@@ -33,6 +37,9 @@ class SignupForm extends StatelessWidget {
                     prefixIcon: Icon(Iconsax.user),
                     labelText: 'Last Name',
                   ),
+                  validator: (value) =>
+                      Validator.validateEmptyField('LastName', value),
+                  controller: controller.lastName,
                 ),
               ),
             ],
@@ -43,6 +50,9 @@ class SignupForm extends StatelessWidget {
               prefixIcon: Icon(Iconsax.user),
               labelText: 'Username',
             ),
+            validator: (value) =>
+                Validator.validateEmptyField('UserName', value),
+            controller: controller.userName,
           ),
           SizedBox(height: 15),
           TextFormField(
@@ -50,6 +60,8 @@ class SignupForm extends StatelessWidget {
               prefixIcon: Icon(Iconsax.sms),
               labelText: 'Email',
             ),
+            validator: (value) => Validator.validateEmail(value),
+            controller: controller.email,
           ),
           SizedBox(height: 15),
           TextFormField(
@@ -58,41 +70,37 @@ class SignupForm extends StatelessWidget {
               labelText: 'Phone Number',
             ),
             keyboardType: TextInputType.phone,
+            validator: (value) => Validator.validatePhoneNumber(value),
+            controller: controller.phoneNumber,
           ),
           SizedBox(height: 15),
-          TextFormField(
-            decoration: InputDecoration(
-              prefixIcon: Icon(Iconsax.lock),
-              suffixIcon: Icon(Iconsax.eye_slash),
-              labelText: 'Password',
+          Obx(
+            () => TextFormField(
+              decoration: InputDecoration(
+                prefixIcon: Icon(Iconsax.lock),
+                suffixIcon: IconButton(
+                  icon: Icon(controller.hidePass.value
+                      ? Iconsax.eye_slash
+                      : Iconsax.eye),
+                  onPressed: () {
+                    controller.hidePass.value = !controller.hidePass.value;
+                  },
+                ),
+                labelText: 'Password',
+              ),
+              obscureText: controller.hidePass.value,
+              autocorrect: false,
+              textCapitalization: TextCapitalization.none,
+              validator: (value) => Validator.validatePassword(value),
+              controller: controller.password,
             ),
-            obscuringCharacter: '*',
-            obscureText: true,
-            autocorrect: false,
-            textCapitalization: TextCapitalization.none,
           ),
           SizedBox(height: 15),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                Get.to(() => EmaiVerificationScreen(
-                      image: 'assets/images/signup_verification.json',
-                      description:
-                          'Cngratulations! Your Account Awating for Verification: Verify Your Email Address to Start Shopping and Experience a Wrld of Unrivaled Deals and Discounts',
-                      subtitle: 'email',
-                      btnTxt: 'Continue',
-                      onPressed: () {
-                        Get.offAll(() => SucsessScreen(
-                              title: 'Your Account Successfully Created!',
-                              description:
-                                  'Welcome to E-Commerce App. Your Account has been successfully created. Start Shopping and Experience a World of Unrivaled Deals and Discounts',
-                              onPressed: () {
-                                Get.offAll(() => LoginScreen());
-                              },
-                            ));
-                      },
-                    ));
+                controller.signup();
               },
               child: Text('Create Account',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -106,7 +114,11 @@ class SignupForm extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Checkbox(value: true, onChanged: (val) {}),
+              Obx(() => Checkbox(
+                  value: controller.privacyPolicy.value,
+                  onChanged: (val) {
+                    controller.privacyPolicy.value = val!;
+                  })),
               Expanded(
                 child: Text.rich(
                   TextSpan(

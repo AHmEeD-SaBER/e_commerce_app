@@ -1,27 +1,28 @@
-import 'package:e_commerce_app/features/authentication/screens/login/login.dart';
+import 'package:e_commerce_app/data/repos/authentication/auth_repo.dart';
+import 'package:e_commerce_app/features/authentication/controllers/email_verifier.dart';
 import 'package:e_commerce_app/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class EmaiVerificationScreen extends StatelessWidget {
-  const EmaiVerificationScreen(
-      {super.key,
-      this.title,
-      required this.description,
-      required this.btnTxt,
-      required this.subtitle,
-      required this.image,
-      required this.onPressed});
+  const EmaiVerificationScreen({
+    super.key,
+    this.title,
+    required this.description,
+    required this.btnTxt,
+    this.subtitle,
+    required this.image,
+  });
   final String? title;
   final String description;
   final String btnTxt;
-  final String subtitle;
+  final String? subtitle;
   final String image;
-  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(EmailVerifier());
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -30,7 +31,7 @@ class EmaiVerificationScreen extends StatelessWidget {
             margin: EdgeInsets.only(right: 15),
             child: IconButton(
               onPressed: () {
-                Get.offAll(() => LoginScreen());
+                AuthRepo.instance.logout();
               },
               icon: Icon(Icons.close),
             ),
@@ -53,7 +54,9 @@ class EmaiVerificationScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               SizedBox(height: 20),
-              Text(subtitle),
+              Text(subtitle ?? '',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                  textAlign: TextAlign.center),
               SizedBox(height: 20),
               Text(
                 description,
@@ -65,7 +68,7 @@ class EmaiVerificationScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    onPressed();
+                    controller.checkEmailVerification();
                   },
                   child: Text(
                     btnTxt,
@@ -81,7 +84,9 @@ class EmaiVerificationScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.sendEmailVerification();
+                  },
                   child: Text(
                     'Resend Email',
                     style: Theme.of(context).textTheme.bodyMedium,

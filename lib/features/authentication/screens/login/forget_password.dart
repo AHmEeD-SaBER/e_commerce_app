@@ -1,5 +1,4 @@
 import 'package:e_commerce_app/features/authentication/screens/login/login.dart';
-import 'package:e_commerce_app/features/authentication/screens/signup_verfication/email_verification.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -55,18 +54,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
-                        Get.to(() => EmaiVerificationScreen(
-                            title: 'Password Resent Email Sent',
-                            description:
-                                'Your Account Security is Our Priority! We\'ve Sent You a Secure Link to Safely Change Your Password and Keep Your Account Prtected.',
-                            btnTxt: 'Done',
-                            subtitle: email,
-                            image: 'assets/images/verfication_success.json',
-                            onPressed: () {
-                              Get.offAll(() => LoginScreen());
-                            }));
-                      },
+                      onPressed: () {},
                       child: Text(
                         'Submit',
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(

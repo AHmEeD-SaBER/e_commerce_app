@@ -1,4 +1,11 @@
 class Validator {
+  static String? validateEmptyField(String fieldName, String? value) {
+    if (value == null || value.isEmpty) {
+      return '$fieldName is required';
+    }
+    return null;
+  }
+
   static String? validateEmail(String? email) {
     if (email == null) {
       return 'Email is required';
@@ -24,24 +31,36 @@ class Validator {
     if (!password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
       return 'Password must contain at least one special character';
     }
+    if (!password.contains(RegExp(r'[0-9]'))) {
+      return 'Password must contain at least one number';
+    }
     return null;
   }
 
   static String? validatePhoneNumber(String? phoneNumber) {
-    if (phoneNumber == null) {
+    if (phoneNumber == null || phoneNumber.isEmpty) {
       return 'Phone number is required';
     }
 
-    final RegExp phoneRegExp1 =
-        RegExp(r'^\d{10} $', caseSensitive: false, multiLine: false);
+    // Remove all non-numeric characters
+    final cleanedNumber = phoneNumber.replaceAll(RegExp(r'[^0-9+]'), '');
 
-    final RegExp phoneRegExp2 =
-        RegExp(r'^\d{11}$', caseSensitive: false, multiLine: false);
+    // Check for common phone number patterns
+    final RegExp phoneRegExp = RegExp(
+      r'^([+]?[\s0-9]+)?(\d{10,12})$',
+      caseSensitive: false,
+      multiLine: false,
+    );
 
-    if (!phoneRegExp1.hasMatch(phoneNumber) ||
-        !phoneRegExp2.hasMatch(phoneNumber)) {
+    if (!phoneRegExp.hasMatch(cleanedNumber)) {
       return 'Enter a valid phone number';
     }
+
+    // Additional length check
+    if (cleanedNumber.length < 10 || cleanedNumber.length > 15) {
+      return 'Phone number must be between 10 and 15 digits';
+    }
+
     return null;
   }
 }
