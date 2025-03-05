@@ -10,6 +10,7 @@ class EmailVerifier extends GetxController {
 
   @override
   void onInit() {
+    sendEmailVerification();
     super.onInit();
   }
 
@@ -25,18 +26,32 @@ class EmailVerifier extends GetxController {
     }
   }
 
-  setTimerForAutoDirect() {
-    Timer.periodic(Duration(seconds: 1), (timer) async {
-      await FirebaseAuth.instance.currentUser?.reload();
-      final user = FirebaseAuth.instance.currentUser;
-      if (user?.emailVerified ?? false) {
+  void setTimerForAutoDirect() {
+    Timer.periodic(const Duration(seconds: 3), (timer) async {
+      // Changed to 3 seconds
+      try {
+        // Get current user and reload
+        final user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          await user.reload();
+          // Get fresh user data after reload
+          final freshUser = FirebaseAuth.instance.currentUser;
+
+          if (freshUser?.emailVerified ?? false) {
+            timer.cancel();
+            Get.offAll(() => SucsessScreen(
+                  title: 'Your Email Has Been Verified',
+                  description:
+                      'Congratulation You account Have been created successfully Happy Shopping !!',
+                  onPressed: () => AuthRepo.instance.screenRedirect(),
+                ));
+          }
+        }
+      } catch (e) {
         timer.cancel();
-        Get.offAll(() => SucsessScreen(
-              title: 'Your Email Has Been Verified',
-              description:
-                  'Congratulation You account Have been created succefuuly Happy Shopping !!',
-              onPressed: () => AuthRepo.instance.screenRedirect(),
-            ));
+        Loader.errorSnackbar(
+            title: 'Error',
+            message: 'Could not verify email status: ${e.toString()}');
       }
     });
   }

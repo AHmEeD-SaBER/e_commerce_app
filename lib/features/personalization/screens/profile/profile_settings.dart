@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/common/widgets/appbar/appbar.dart';
+import 'package:e_commerce_app/data/repos/authentication/auth_repo.dart';
 import 'package:e_commerce_app/features/personalization/screens/addresses/address.dart';
 import 'package:e_commerce_app/features/personalization/screens/orders/orders.dart';
 import 'package:e_commerce_app/features/personalization/screens/profile/profile.dart';
@@ -152,7 +153,9 @@ class ProfileSettingsScreen extends StatelessWidget {
                           color: CustomColors.error,
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        AuthRepo.instance.logout();
+                      },
                       child: Text('Sign Out'),
                     ),
                   ),

@@ -60,7 +60,7 @@ class AnimationLoader extends StatelessWidget {
           const SizedBox(height: 20),
           Text(
             text,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 20),

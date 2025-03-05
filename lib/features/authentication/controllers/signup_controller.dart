@@ -44,6 +44,8 @@ class SignupController extends GetxController {
       // Check privacy policy
       if (!privacyPolicy.value) {
         FullScreenLoader.stopLoadingDialog();
+        Loader.warningSnackBar(
+            title: 'Error', message: 'Please accept the privacy policy');
         return;
       }
 
