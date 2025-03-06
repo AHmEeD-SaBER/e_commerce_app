@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/bottom_nav_bar.dart';
+import 'package:e_commerce_app/data/repos/authentication/user/user_repo.dart';
 import 'package:e_commerce_app/features/authentication/screens/login/login.dart';
 import 'package:e_commerce_app/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:e_commerce_app/features/authentication/screens/signup_verfication/email_verification.dart';
@@ -11,6 +12,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRepo extends GetxController {
   static AuthRepo get instance => Get.find();
+
+  User? get user => _auth.currentUser;
 
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
@@ -136,6 +139,29 @@ class AuthRepo extends GetxController {
   Future<void> resetPassword(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      Loader.errorSnackbar(
+          title: 'Error',
+          message: e.message ?? 'An unknown error occurred. Please try again.');
+    }
+  }
+
+  Future<void> reAuthenticate(String email, String password) async {
+    try {
+      AuthCredential credential =
+          EmailAuthProvider.credential(email: email, password: password);
+      await _auth.currentUser?.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      Loader.errorSnackbar(
+          title: 'Error',
+          message: e.message ?? 'An unknown error occurred. Please try again.');
+    }
+  }
+
+  Future<void> deleteUser() async {
+    try {
+      await UserRepo.instance.deleteUser();
+      await _auth.currentUser?.delete();
     } on FirebaseAuthException catch (e) {
       Loader.errorSnackbar(
           title: 'Error',

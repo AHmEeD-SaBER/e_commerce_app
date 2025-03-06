@@ -1,5 +1,7 @@
 import 'package:e_commerce_app/common/widgets/appbar/appbar.dart';
+import 'package:e_commerce_app/common/widgets/shimmer.dart';
 import 'package:e_commerce_app/data/repos/authentication/auth_repo.dart';
+import 'package:e_commerce_app/features/personalization/controllers/user_controller.dart';
 import 'package:e_commerce_app/features/personalization/screens/addresses/address.dart';
 import 'package:e_commerce_app/features/personalization/screens/orders/orders.dart';
 import 'package:e_commerce_app/features/personalization/screens/profile/profile.dart';
@@ -12,7 +14,6 @@ import 'package:e_commerce_app/utils/constants/colors.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
 
 import 'package:iconsax/iconsax.dart';
 
@@ -21,6 +22,7 @@ class ProfileSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final contorller = UserController.instance;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -34,12 +36,16 @@ class ProfileSettingsScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                   ),
-                  ProfileTile(
-                    title: 'Ahmed Saber',
-                    subtitle: 'ahmad@fcai.com',
-                    onPressed: () {
-                      Get.to(Profile());
-                    },
+                  Obx(
+                    () => contorller.userLoading.value
+                        ? ShimmerEffect(width: 200, height: 20)
+                        : ProfileTile(
+                            title: contorller.user.value.fullName,
+                            subtitle: contorller.user.value.email,
+                            onPressed: () {
+                              Get.to(Profile());
+                            },
+                          ),
                   ),
                   SizedBox(
                     height: 30,

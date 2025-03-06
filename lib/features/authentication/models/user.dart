@@ -3,11 +3,11 @@ import 'package:e_commerce_app/utils/formatters/formatter.dart';
 
 class UserModel {
   final String id;
-  final String firstName;
-  final String lastName;
-  final String userName;
-  final String email;
-  final String phoneNumber;
+  String firstName;
+  String lastName;
+  String userName;
+  String email;
+  String phoneNumber;
 
   Map<String, dynamic> toJson() {
     return {

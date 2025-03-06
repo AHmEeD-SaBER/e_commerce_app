@@ -1,7 +1,11 @@
 import 'package:e_commerce_app/common/widgets/appbar/appbar.dart';
 import 'package:e_commerce_app/common/widgets/circle_image_container.dart';
 import 'package:e_commerce_app/common/widgets/section_heading.dart';
+import 'package:e_commerce_app/common/widgets/shimmer.dart';
+import 'package:e_commerce_app/features/personalization/controllers/user_controller.dart';
+import 'package:e_commerce_app/features/personalization/screens/profile/widgets/field_edit.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
+import 'package:e_commerce_app/utils/formatters/formatter.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +17,7 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return Scaffold(
       appBar: CustomAppbar(
         title: Text(
@@ -66,15 +71,21 @@ class Profile extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                ProfileEdit(
-                  title: 'Name',
-                  value: 'Ahmed Saber',
-                  onPressed: () {},
+                Obx(
+                  () => ProfileEdit(
+                    title: 'Name',
+                    value: controller.user.value.fullName,
+                    onPressed: () {
+                      Get.to(() => UpdateName());
+                    },
+                  ),
                 ),
-                ProfileEdit(
-                  title: 'Username',
-                  value: 'Feyd Rautha',
-                  onPressed: () {},
+                Obx(
+                  () => ProfileEdit(
+                    title: 'Username',
+                    value: controller.user.value.userName,
+                    onPressed: () {},
+                  ),
                 ),
                 SizedBox(
                   height: 20,
@@ -88,20 +99,25 @@ class Profile extends StatelessWidget {
                   blacBackGround: true,
                   showActionBtn: false,
                 ),
-                ProfileEdit(
-                  title: 'User ID',
-                  value: '452765',
-                  onPressed: () {},
-                  icon: Iconsax.copy,
+                Obx(
+                  () => ProfileEdit(
+                    title: 'User ID',
+                    value: controller.user.value.id,
+                    onPressed: () {},
+                    icon: Iconsax.copy,
+                  ),
                 ),
-                ProfileEdit(
-                  title: 'E-mail',
-                  value: 'ahmed@fcai.edu.eg',
-                  onPressed: () {},
+                Obx(
+                  () => ProfileEdit(
+                    title: 'E-mail',
+                    value: controller.user.value.email,
+                    onPressed: () {},
+                  ),
                 ),
                 ProfileEdit(
                   title: 'Phone Number',
-                  value: '+20-012-2216-4058',
+                  value: Formatter.formatPhoneNumber(
+                      controller.user.value.phoneNumber),
                   onPressed: () {},
                 ),
                 ProfileEdit(
@@ -123,7 +139,9 @@ class Profile extends StatelessWidget {
                 ),
                 Center(
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.deletePopupWarning();
+                    },
                     child: Text(
                       'Close Account',
                       style: Theme.of(context)
@@ -157,33 +175,37 @@ class ProfileEdit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 3,
-          child: Text(
-            title,
-            style: Theme.of(context).textTheme.bodySmall,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-        Expanded(
-          flex: 5,
-          child: Text(
-            value,
-            style: Theme.of(context).textTheme.bodyMedium,
-            textAlign: TextAlign.start,
-          ),
-        ),
-        if (onPressed != null)
-          IconButton(
-            onPressed: () {
-              onPressed!();
-            },
-            icon: Icon(icon),
-            color: CustomColors.primaryColor,
-          )
-      ],
-    );
+    final controller = UserController.instance;
+    return controller.userLoading.value
+        ? ShimmerEffect(width: double.infinity, height: 15)
+        : Row(
+            children: [
+              Expanded(
+                flex: 3,
+                child: Text(
+                  title,
+                  style: Theme.of(context).textTheme.bodySmall,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Expanded(
+                flex: 6,
+                child: Text(
+                  value,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              if (onPressed != null)
+                IconButton(
+                  onPressed: () {
+                    onPressed!();
+                  },
+                  icon: Icon(icon),
+                  color: CustomColors.primaryColor,
+                )
+            ],
+          );
   }
 }
