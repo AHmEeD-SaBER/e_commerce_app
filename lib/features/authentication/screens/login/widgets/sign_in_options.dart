@@ -1,5 +1,7 @@
+import 'package:e_commerce_app/features/authentication/controllers/login_controller.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SignInOptions extends StatelessWidget {
   const SignInOptions({
@@ -8,6 +10,7 @@ class SignInOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -19,7 +22,9 @@ class SignInOptions extends StatelessWidget {
             borderRadius: BorderRadius.circular(100),
           ),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              controller.singInWithGoogle();
+            },
             icon: Image.asset('assets/logos/google.png', scale: 10),
           ),
         ),

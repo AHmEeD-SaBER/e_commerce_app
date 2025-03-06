@@ -1,5 +1,4 @@
 import 'package:e_commerce_app/data/repos/authentication/auth_repo.dart';
-import 'package:e_commerce_app/features/authentication/controllers/email_verifier.dart';
 import 'package:e_commerce_app/utils/helpers/network_manager.dart';
 import 'package:get/get.dart';
 

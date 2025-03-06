@@ -14,6 +14,7 @@ class FullScreenLoader {
       builder: (_) => PopScope(
         canPop: false, // Disable popping with the back button
         child: Container(
+          padding: const EdgeInsets.all(20),
           color: DeviceUtility.isDarkMood(Get.context!)
               ? Colors.black
               : CustomColors.white,
@@ -56,7 +57,7 @@ class AnimationLoader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Lottie.asset(animation,
-              width: MediaQuery.of(context).size.width * 0.8),
+              width: MediaQuery.of(context).size.width * 0.8, height: 200),
           const SizedBox(height: 20),
           Text(
             text,

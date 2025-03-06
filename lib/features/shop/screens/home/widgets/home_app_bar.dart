@@ -24,7 +24,7 @@ class HomeAppBar extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
-                    .copyWith(color: CustomColors.darkerGrey),
+                    .copyWith(color: CustomColors.dark),
               ),
               Text(
                 'Ahmed Saber',

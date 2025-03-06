@@ -45,7 +45,7 @@ class EmaiVerificationScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Lottie.asset(image),
+              Lottie.asset(image, height: 200),
               SizedBox(height: 20),
               if (title != null)
                 Text(

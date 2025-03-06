@@ -7,10 +7,15 @@ import 'package:get/get.dart';
 
 class EmailVerifier extends GetxController {
   static EmailVerifier get instance => Get.find();
+  final _auth = FirebaseAuth.instance;
 
   @override
   void onInit() {
-    sendEmailVerification();
+    // Only send verification email if user is not verified
+    final user = _auth.currentUser;
+    if (user != null && !user.emailVerified) {
+      sendEmailVerification();
+    }
     super.onInit();
   }
 
@@ -27,7 +32,7 @@ class EmailVerifier extends GetxController {
   }
 
   void setTimerForAutoDirect() {
-    Timer.periodic(const Duration(seconds: 3), (timer) async {
+    Timer.periodic(const Duration(milliseconds: 500), (timer) async {
       // Changed to 3 seconds
       try {
         // Get current user and reload
@@ -57,12 +62,12 @@ class EmailVerifier extends GetxController {
   }
 
   checkEmailVerification() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user?.emailVerified ?? false) {
+    final user = _auth.currentUser;
+    if (user != null && user.emailVerified) {
       Get.offAll(() => SucsessScreen(
             title: 'Your Email Has Been Verified',
             description:
-                'Congratulation You account Have been created succefuuly Happy Shopping !!',
+                'Congratulation Your account Have been created succefuuly Happy Shopping !!',
             onPressed: () => AuthRepo.instance.screenRedirect(),
           ));
     } else {

@@ -8,7 +8,6 @@ class UserModel {
   final String userName;
   final String email;
   final String phoneNumber;
-  final String password;
 
   Map<String, dynamic> toJson() {
     return {
@@ -18,22 +17,28 @@ class UserModel {
       'userName': userName,
       'email': email,
       'phoneNumber': phoneNumber,
-      'password': password,
     };
   }
 
   String get fullName => '$firstName $lastName';
+  static List<String> nameParts(String fullName) => fullName.split(' ');
 
   String get formattedPhoneNumber => Formatter.formatPhoneNumber(phoneNumber);
 
+  static String generatedUsername(fullname) {
+    List<String> nameparts = fullname.split(" ");
+
+    return 'user_${nameparts[0].toLowerCase() + (nameparts.length > 1 ? nameparts.sublist(1).join(' ') : '')}';
+  }
+
   static UserModel empty() => UserModel(
-      id: '',
-      firstName: '',
-      lastName: '',
-      userName: '',
-      email: '',
-      phoneNumber: '',
-      password: '');
+        id: '',
+        firstName: '',
+        lastName: '',
+        userName: '',
+        email: '',
+        phoneNumber: '',
+      );
 
   factory UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
     if (doc.data() != null) {
@@ -45,18 +50,17 @@ class UserModel {
         userName: data['userName'],
         email: data['email'],
         phoneNumber: data['phoneNumber'],
-        password: data['password'],
       );
     }
     throw Exception('Document data is null');
   }
 
-  UserModel(
-      {required this.id,
-      required this.firstName,
-      required this.lastName,
-      required this.userName,
-      required this.email,
-      required this.phoneNumber,
-      required this.password});
+  UserModel({
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.userName,
+    required this.email,
+    required this.phoneNumber,
+  });
 }

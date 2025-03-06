@@ -1,4 +1,6 @@
+import 'package:e_commerce_app/features/authentication/controllers/forget_pass_controller.dart';
 import 'package:e_commerce_app/features/authentication/screens/login/login.dart';
+import 'package:e_commerce_app/utils/validators/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -9,6 +11,7 @@ class ForgetPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ForgetPassController());
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -42,8 +45,11 @@ class ForgetPasswordScreen extends StatelessWidget {
                 height: 20,
               ),
               Form(
+                key: controller.formKey,
                 child: Column(children: [
                   TextFormField(
+                    controller: controller.email,
+                    validator: (email) => Validator.validateEmail(email),
                     decoration: InputDecoration(
                       prefixIcon: Icon(Iconsax.sms),
                       labelText: 'E-mail',
@@ -54,7 +60,9 @@ class ForgetPasswordScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.forgetPassword();
+                      },
                       child: Text(
                         'Submit',
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(

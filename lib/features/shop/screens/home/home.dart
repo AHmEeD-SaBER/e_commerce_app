@@ -88,11 +88,9 @@ class HomeScreen extends StatelessWidget {
                 images: [
                   'assets/images/sales/sale1.jpeg',
                   'assets/images/sales/sale5.jpeg',
-                  'assets/images/sales/sale2.jpeg',
                   'assets/images/sales/sale4.jpeg',
                   'assets/images/sales/sale7.jpeg',
                   'assets/images/sales/sale3.jpeg',
-                  'assets/images/sales/sale6.jpeg',
                 ],
               ),
             ),

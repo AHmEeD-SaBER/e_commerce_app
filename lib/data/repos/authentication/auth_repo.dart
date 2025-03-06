@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRepo extends GetxController {
   static AuthRepo get instance => Get.find();
@@ -58,6 +59,36 @@ class AuthRepo extends GetxController {
     }
   }
 
+  Future<UserCredential> login(String email, String password) async {
+    try {
+      return await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      Loader.errorSnackbar(
+          title: 'Error',
+          message: e.message ?? 'An unknown error occurred. Please try again.');
+      rethrow;
+    }
+  }
+
+  Future<UserCredential> loginWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser!.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+
+      return await _auth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      Loader.errorSnackbar(
+          title: 'Error',
+          message: e.message ?? 'An unknown error occurred. Please try again.');
+      rethrow;
+    }
+  }
+
   void screenRedirect() async {
     final user = _auth.currentUser;
     if (user != null) {
@@ -95,6 +126,16 @@ class AuthRepo extends GetxController {
     try {
       await _auth.signOut();
       Get.offAll(() => LoginScreen());
+    } on FirebaseAuthException catch (e) {
+      Loader.errorSnackbar(
+          title: 'Error',
+          message: e.message ?? 'An unknown error occurred. Please try again.');
+    }
+  }
+
+  Future<void> resetPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
       Loader.errorSnackbar(
           title: 'Error',

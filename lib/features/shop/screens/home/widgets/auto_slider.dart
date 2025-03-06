@@ -24,7 +24,7 @@ class AutoSlider extends StatelessWidget {
             autoPlay: true,
             autoPlayCurve: Curves.easeIn,
             autoPlayAnimationDuration: Duration(milliseconds: 500),
-            height: 180,
+            height: 230,
             onPageChanged: (index, reason) =>
                 controller.onCarousalChange(index),
             viewportFraction: 1,
@@ -35,7 +35,7 @@ class AutoSlider extends StatelessWidget {
                 isFill: T,
                 imageUrl: images[i],
                 isNetworkImage: false,
-                height: 180,
+                height: 230,
               ),
           ],
         ),
@@ -48,7 +48,7 @@ class AutoSlider extends StatelessWidget {
             children: [
               for (int i = 0; i < images.length; i++)
                 CircleContainer(
-                    heigt: 4,
+                    heigt: 3,
                     width: 20,
                     padding: 0,
                     margin: EdgeInsets.only(right: 5),
