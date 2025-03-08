@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/common/widgets/grid_lay_out.dart';
+import 'package:e_commerce_app/common/widgets/shimmer.dart';
 import 'package:e_commerce_app/features/shop/controllers/brand_controller.dart';
 import 'package:e_commerce_app/features/shop/controllers/products_controller.dart';
 import 'package:e_commerce_app/features/shop/models/brand.dart';
@@ -115,67 +116,54 @@ class ProductShimmer extends StatelessWidget {
     return Shimmer.fromColors(
       baseColor: Colors.grey[300]!,
       highlightColor: Colors.grey[100]!,
-      child: ListView.builder(
-        shrinkWrap: true,
+      child: GridView.builder(
+        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+        itemCount: 4,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Row(
-              children: [
-                Container(
-                  height: 160,
-                  width: 120,
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 20,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: 20,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                        height: 20,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+        shrinkWrap: true,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 15,
+          crossAxisSpacing: 15,
+          mainAxisExtent: 310,
+        ),
+        itemBuilder: (context, indx) => Column(
+          children: [
+            SizedBox(
+              height: 180,
+              width: double.infinity,
+              child: ShimmerEffect(
+                  width: double.infinity, height: double.infinity),
             ),
-          );
-        },
+            SizedBox(
+              height: 30,
+            ),
+            SizedBox(
+              height: 10,
+              width: double.infinity,
+              child: ShimmerEffect(
+                  width: double.infinity, height: double.infinity),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              height: 10,
+              width: double.infinity,
+              child: ShimmerEffect(
+                  width: double.infinity, height: double.infinity),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              height: 20,
+              width: double.infinity,
+              child: ShimmerEffect(
+                  width: double.infinity, height: double.infinity),
+            ),
+          ],
+        ),
       ),
     );
   }

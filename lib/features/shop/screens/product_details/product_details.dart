@@ -29,7 +29,6 @@ class ProductDetails extends StatelessWidget {
             ProductImagesSlider(
               iamges: List<String>.from(product.images),
               thumbnail: product.thumbnail,
-              height: 450,
             ),
             Padding(
               padding: EdgeInsets.only(right: 24, left: 24, bottom: 24),

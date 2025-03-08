@@ -12,12 +12,10 @@ class ProductImagesSlider extends StatelessWidget {
   const ProductImagesSlider({
     super.key,
     required this.iamges,
-    this.height,
     required this.thumbnail,
   });
   final List<String> iamges;
   final String thumbnail;
-  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +34,9 @@ class ProductImagesSlider extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    height: 300,
-                    margin: EdgeInsets.only(
-                        bottom: 20, top: DeviceUtility.getAppBarHeight()),
+                    height: 400,
+                    margin:
+                        EdgeInsets.only(top: DeviceUtility.getAppBarHeight()),
                     child: Container(
                       padding: const EdgeInsets.all(20),
                       margin: const EdgeInsets.only(top: 20),
