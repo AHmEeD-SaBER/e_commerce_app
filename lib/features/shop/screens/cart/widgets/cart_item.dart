@@ -46,7 +46,7 @@ class CartItem extends StatelessWidget {
                   SizedBox(
                     height: 5,
                   ),
-                  BrandContainer(brand: 'Nike', isVerified: true),
+                  // BrandContainer(brand: 'Nike', isVerified: true),
                   Text.rich(
                     TextSpan(
                       children: [

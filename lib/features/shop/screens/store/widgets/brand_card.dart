@@ -35,50 +35,7 @@ class BrandCard extends StatelessWidget {
       onTap: onPressed ??
           () {
             Get.to(() => AllScreen(
-                  items: [
-                    ProductCardVertical(
-                      image: ImageStrings.productImage1,
-                      title: 'Green Nike Air Shoes',
-                      price: 35.5,
-                      sale: 25,
-                      brand: 'Nike',
-                    ),
-                    ProductCardVertical(
-                      image: ImageStrings.productImage3,
-                      title: 'Black Jacket',
-                      price: 50.5,
-                      sale: 33,
-                      brand: 'Adidas',
-                    ),
-                    ProductCardVertical(
-                      image: ImageStrings.productImage4,
-                      title: 'Blue Jeans',
-                      price: 99.9,
-                      sale: 0,
-                      brand: 'Zara',
-                    ),
-                    ProductCardVertical(
-                      image: ImageStrings.productImage15,
-                      title: 'Iphone 8',
-                      price: 300.0,
-                      sale: 20,
-                      brand: 'Apple',
-                    ),
-                    ProductCardVertical(
-                      image: ImageStrings.productImage11,
-                      title: 'Samsung S9',
-                      price: 400,
-                      sale: 43,
-                      brand: 'Samsung',
-                    ),
-                    ProductCardVertical(
-                      image: ImageStrings.productImage21,
-                      title: 'Nike Shoes',
-                      price: 199.5,
-                      sale: 30,
-                      brand: 'Nike',
-                    )
-                  ],
+                  items: [],
                   showFilterBar: true,
                   title: 'Nike',
                   showBrand: true,
@@ -114,12 +71,12 @@ class BrandCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  BrandContainer(
-                    brand: name,
-                    maxWeight: maxWeight,
-                    isVerified: isVerified,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
+                  // BrandContainer(
+                  //   brand: name,
+                  //   maxWeight: maxWeight,
+                  //   isVerified: isVerified,
+                  //   style: Theme.of(context).textTheme.titleLarge,
+                  // ),
                   Text(
                     '$noProducts Products',
                     style: Theme.of(context).textTheme.labelMedium,

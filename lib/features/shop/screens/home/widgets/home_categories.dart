@@ -14,7 +14,7 @@ class HomeCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CategoriesController());
-    controller.fetchAllCategories();
+    if (controller.featuredCategories.isEmpty) controller.fetchAllCategories();
     final categories = controller.featuredCategories;
     return Padding(
       padding: EdgeInsets.only(left: 30),

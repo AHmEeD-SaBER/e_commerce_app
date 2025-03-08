@@ -3,31 +3,36 @@ import 'package:e_commerce_app/common/widgets/circle_image_container.dart';
 import 'package:e_commerce_app/common/widgets/product_price.dart';
 import 'package:e_commerce_app/common/widgets/product_title.dart';
 import 'package:e_commerce_app/common/widgets/sale_container.dart';
+import 'package:e_commerce_app/features/shop/models/brand.dart';
+import 'package:e_commerce_app/features/shop/models/product.dart';
 import 'package:flutter/material.dart';
 
 class ProductMetaData extends StatelessWidget {
-  const ProductMetaData({super.key});
+  const ProductMetaData(
+      {super.key, required this.product, required this.brand});
+  final Product product;
+  final Brand brand;
 
   @override
   Widget build(BuildContext context) {
+    print(brand.icon);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            SaleContainer(amount: '24%', obacity: 255),
+            SaleContainer(amount: product.sale.toString(), obacity: 255),
             const SizedBox(width: 15),
             ProductPrice(
-              price: '234',
+              price: product.price.toString(),
               currency: '\$',
-              isDiscounted: true,
-              discount: 0.24,
+              discount: product.sale,
             ),
           ],
         ),
         const SizedBox(height: 10),
         ProductTitle(
-          title: 'Nike Shoes',
+          title: product.title,
           smallSize: false,
           maxLines: 1,
         ),
@@ -35,7 +40,7 @@ class ProductMetaData extends StatelessWidget {
         Row(
           children: [
             ProductTitle(
-              title: 'Status',
+              title: product.stock.toString(),
               smallSize: true,
               maxLines: 1,
             ),
@@ -52,10 +57,9 @@ class ProductMetaData extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            CircleImageContainer(image: 'assets/icons/brands/nike.png'),
+            CircleImageContainer(image: brand.icon),
             BrandContainer(
-              brand: 'Nike',
-              isVerified: true,
+              brand: brand,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),

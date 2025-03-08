@@ -2,6 +2,7 @@ import 'package:e_commerce_app/common/widgets/appbar/appbar.dart';
 import 'package:e_commerce_app/common/widgets/curved_image_container.dart';
 import 'package:e_commerce_app/common/widgets/product_card_horizontal.dart';
 import 'package:e_commerce_app/common/widgets/section_heading.dart';
+import 'package:e_commerce_app/features/shop/models/brand.dart';
 import 'package:e_commerce_app/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 
@@ -73,7 +74,12 @@ class ProductsSection extends StatelessWidget {
           child: ListView.separated(
             itemBuilder: (_, indx) => ProductCardHorizontal(
                 title: 'Nike Shoes',
-                brand: 'Nike',
+                brand: Brand(
+                    name: 'Nike',
+                    icon: ImageStrings.productImage1,
+                    noProducts: 34,
+                    id: '1',
+                    isVerified: true),
                 price: 34.63,
                 sale: 23,
                 image: ImageStrings.productImage1),

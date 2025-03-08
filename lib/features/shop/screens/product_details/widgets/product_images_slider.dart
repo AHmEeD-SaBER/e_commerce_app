@@ -5,6 +5,7 @@ import 'package:e_commerce_app/utils/constants/colors.dart';
 import 'package:e_commerce_app/utils/constants/image_strings.dart';
 import 'package:e_commerce_app/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProductImagesSlider extends StatelessWidget {
@@ -12,12 +13,15 @@ class ProductImagesSlider extends StatelessWidget {
     super.key,
     required this.iamges,
     this.height,
+    required this.thumbnail,
   });
   final List<String> iamges;
+  final String thumbnail;
   final double? height;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ImgSliderController());
     return CustomClipPath(
       child: Container(
         width: double.infinity,
@@ -26,55 +30,77 @@ class ProductImagesSlider extends StatelessWidget {
               ? CustomColors.darkerGrey
               : CustomColors.grey,
         ),
-        child: Stack(
-          children: [
-            Container(
-              height: height,
-              margin: const EdgeInsets.only(bottom: 20),
-              child: Container(
-                padding: const EdgeInsets.all(20),
-                margin: const EdgeInsets.only(top: 20),
-                child: Center(
-                  child: Image.asset(ImageStrings.productImage1),
-                ),
+        child: Obx(
+          () => Column(
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    height: 300,
+                    margin: EdgeInsets.only(
+                        bottom: 20, top: DeviceUtility.getAppBarHeight()),
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      margin: const EdgeInsets.only(top: 20),
+                      child: Center(
+                        child: Image.asset(iamges[controller.current]),
+                      ),
+                    ),
+                  ),
+                  CustomAppbar(
+                    showBackArrow: true,
+                    actions: [
+                      IconButton(onPressed: () {}, icon: Icon(Iconsax.heart))
+                    ],
+                  ),
+                ],
               ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 24,
-              right: 24,
-              child: Container(
+              Container(
                 height: 100,
                 margin: const EdgeInsets.only(bottom: 30),
                 child: ListView.separated(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   physics: AlwaysScrollableScrollPhysics(),
-                  itemBuilder: (context, indx) => CurvedImageContainer(
-                    imageUrl: iamges[indx],
-                    width: 90,
-                    height: 90,
-                    backGroundColor: DeviceUtility.isDarkMood(context)
-                        ? CustomColors.black
-                        : const Color.fromARGB(255, 187, 187, 187),
-                    border: Border.all(color: CustomColors.black, width: 1),
+                  itemBuilder: (context, indx) => GestureDetector(
+                    onTap: () {
+                      controller.setCurrent(indx);
+                    },
+                    child: CurvedImageContainer(
+                      imageUrl: iamges[indx],
+                      width: 90,
+                      height: 90,
+                      backGroundColor: DeviceUtility.isDarkMood(context)
+                          ? CustomColors.black
+                          : const Color.fromARGB(255, 187, 187, 187),
+                      border: Border.all(
+                          color: controller.current == indx
+                              ? CustomColors.primaryColor
+                              : Colors.transparent,
+                          width: 1),
+                    ),
                   ),
                   separatorBuilder: (context, indx) => const SizedBox(
                     width: 10,
                   ),
-                  itemCount: 7,
+                  itemCount: iamges.length,
                 ),
               ),
-            ),
-            CustomAppbar(
-              showBackArrow: true,
-              actions: [
-                IconButton(onPressed: () {}, icon: Icon(Iconsax.heart))
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
+  }
+}
+
+class ImgSliderController extends GetxController {
+  static ImgSliderController get instance => Get.find();
+  final _current = 0.obs;
+
+  int get current => _current.value;
+
+  void setCurrent(int index) {
+    _current.value = index;
   }
 }

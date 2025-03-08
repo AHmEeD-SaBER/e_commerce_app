@@ -1,4 +1,7 @@
 import 'package:e_commerce_app/common/widgets/grid_lay_out.dart';
+import 'package:e_commerce_app/features/shop/controllers/brand_controller.dart';
+import 'package:e_commerce_app/features/shop/controllers/products_controller.dart';
+import 'package:e_commerce_app/features/shop/models/brand.dart';
 import 'package:e_commerce_app/features/shop/screens/home/widgets/auto_slider.dart';
 import 'package:e_commerce_app/features/shop/screens/home/widgets/home_app_bar.dart';
 import 'package:e_commerce_app/features/shop/screens/home/widgets/home_categories.dart';
@@ -9,57 +12,21 @@ import 'package:e_commerce_app/common/widgets/section_heading.dart';
 import 'package:e_commerce_app/utils/constants/image_strings.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
-
-  final products = [
-    ProductCardVertical(
-      image: ImageStrings.productImage1,
-      title: 'Green Nike Air Shoes',
-      price: 35.5,
-      sale: 25,
-      brand: 'Nike',
-    ),
-    ProductCardVertical(
-      image: ImageStrings.productImage3,
-      title: 'Black Jacket',
-      price: 50.5,
-      sale: 33,
-      brand: 'Adidas',
-    ),
-    ProductCardVertical(
-      image: ImageStrings.productImage4,
-      title: 'Blue Jeans',
-      price: 99.9,
-      sale: 0,
-      brand: 'Zara',
-    ),
-    ProductCardVertical(
-      image: ImageStrings.productImage15,
-      title: 'Iphone 8',
-      price: 300.0,
-      sale: 20,
-      brand: 'Apple',
-    ),
-    ProductCardVertical(
-      image: ImageStrings.productImage11,
-      title: 'Samsung S9',
-      price: 400,
-      sale: 43,
-      brand: 'Samsung',
-    ),
-    ProductCardVertical(
-      image: ImageStrings.productImage21,
-      title: 'Nike Shoes',
-      price: 199.5,
-      sale: 30,
-      brand: 'Nike',
-    )
-  ];
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final contoroller = Get.put(ProductsController());
+    final brandController = Get.put(BrandController());
+    if (brandController.brands.isEmpty) {
+      brandController.fetchAllBrands();
+    }
+    contoroller.fetchFeaturedProducts();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -83,7 +50,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.symmetric(horizontal: 7),
               child: AutoSlider(
                 images: [
                   'assets/images/sales/sale1.jpeg',
@@ -110,12 +77,105 @@ class HomeScreen extends StatelessWidget {
                       showActionBtn: true,
                     ),
                   ),
-                  GridLayOut(items: products),
+                  Obx(
+                    () => contoroller.isLoading.value ||
+                            brandController.isLoading.value
+                        ? ProductShimmer()
+                        : GridLayOut(
+                            items: contoroller.products.map((product) {
+                              // Find brand safely with null check
+                              final brand = brandController.brands
+                                      .firstWhereOrNull(
+                                    (brand) => brand.id == product.brandId,
+                                  ) ??
+                                  Brand
+                                      .empty(); // Provide default empty brand if not found
+
+                              return ProductCardVertical(
+                                product: product,
+                              );
+                            }).toList(),
+                          ),
+                  ),
                 ],
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ProductShimmer extends StatelessWidget {
+  const ProductShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child: Row(
+              children: [
+                Container(
+                  height: 160,
+                  width: 120,
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 20,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        height: 20,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        height: 20,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

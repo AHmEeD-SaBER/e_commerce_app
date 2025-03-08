@@ -22,8 +22,7 @@ class AutoSlider extends StatelessWidget {
         CarouselSlider(
           options: CarouselOptions(
             autoPlay: true,
-            autoPlayCurve: Curves.easeIn,
-            autoPlayAnimationDuration: Duration(milliseconds: 500),
+            autoPlayAnimationDuration: Duration(milliseconds: 300),
             height: 200,
             onPageChanged: (index, reason) =>
                 controller.onCarousalChange(index),
@@ -35,6 +34,7 @@ class AutoSlider extends StatelessWidget {
                 isFill: T,
                 imageUrl: images[i],
                 isNetworkImage: false,
+                paddingHorizontal: 0,
                 height: 230,
               ),
           ],

@@ -21,7 +21,7 @@ class Store extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CategoriesController());
-    controller.fetchAllCategories();
+    if (controller.categories.isEmpty) controller.fetchAllCategories();
     return DefaultTabController(
       length: controller.categories.length,
       child: Scaffold(

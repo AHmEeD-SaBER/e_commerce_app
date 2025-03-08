@@ -1,3 +1,5 @@
+import 'package:e_commerce_app/features/shop/models/brand.dart';
+import 'package:e_commerce_app/features/shop/models/product.dart';
 import 'package:e_commerce_app/features/shop/screens/product_details/widgets/bottom_add_to_cart.dart';
 import 'package:e_commerce_app/features/shop/screens/product_details/widgets/product_attribute.dart';
 import 'package:e_commerce_app/features/shop/screens/product_details/widgets/product_images_slider.dart';
@@ -13,7 +15,9 @@ import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductDetails extends StatelessWidget {
-  const ProductDetails({super.key});
+  const ProductDetails({super.key, required this.product, required this.brand});
+  final Product product;
+  final Brand brand;
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +27,8 @@ class ProductDetails extends StatelessWidget {
         child: Column(
           children: [
             ProductImagesSlider(
-              iamges: [
-                ImageStrings.productImage1,
-                ImageStrings.productImage2,
-                ImageStrings.productImage3,
-                ImageStrings.productImage4,
-                ImageStrings.productImage5,
-                ImageStrings.productImage6,
-                ImageStrings.productImage7,
-              ],
+              iamges: List<String>.from(product.images),
+              thumbnail: product.thumbnail,
               height: 450,
             ),
             Padding(
@@ -52,7 +49,7 @@ class ProductDetails extends StatelessWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: "4.5",
+                              text: product.rating.toString(),
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyLarge!
@@ -73,11 +70,16 @@ class ProductDetails extends StatelessWidget {
                       ),
                     ],
                   ),
-                  ProductMetaData(),
+                  ProductMetaData(
+                    product: product,
+                    brand: brand,
+                  ),
                   SizedBox(
                     height: 10,
                   ),
-                  ProductAttribute(),
+                  ProductAttribute(
+                    attributes: product.attributes,
+                  ),
                   SizedBox(
                     height: 20,
                   ),
@@ -99,12 +101,12 @@ class ProductDetails extends StatelessWidget {
                     height: 20,
                   ),
                   SectionHeading(
-                    title: 'Description',
+                    title: product.title,
                     showActionBtn: false,
                     blacBackGround: true,
                   ),
                   ReadMoreText(
-                    'This is the Description of the product description for green nike sleeve less vest. There are more things that can be added to this description. This is the Description of the product description for green nike sleeve less vest. There are more things that can be added to this description. This is the Description of the product description for green nike sleeve less vest. There are more things that can be added to this description. This is the Description of the product description for green nike sleeve less vest. There are more things that can be added to this description.',
+                    product.description,
                     trimLines: 3,
                     colorClickableText: CustomColors.primaryColor,
                     trimMode: TrimMode.Line,
