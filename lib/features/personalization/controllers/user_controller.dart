@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:e_commerce_app/data/repos/authentication/auth_repo.dart';
-import 'package:e_commerce_app/data/repos/authentication/user/user_repo.dart';
+import 'package:e_commerce_app/data/repos/user/user_repo.dart';
 import 'package:e_commerce_app/features/authentication/models/user.dart';
 import 'package:e_commerce_app/features/authentication/screens/login/login.dart';
 import 'package:e_commerce_app/features/authentication/screens/login/re_auth_login_form.dart';
@@ -111,29 +111,32 @@ class UserController extends GetxController {
 
   Future<void> deleteUser() async {
     try {
-      FullScreenLoader.openLoadingDialog(
-          'Processing', 'assets/images/processing.json');
+      // First close the warning dialog
+      Get.back();
 
       final auth = AuthRepo.instance;
       final provider = auth.user!.providerData.map((e) => e.providerId).first;
 
       if (provider.isNotEmpty) {
         if (provider == 'google.com') {
+          FullScreenLoader.openLoadingDialog(
+              'Processing', 'assets/images/processing.json');
+
           await auth.loginWithGoogle();
           await auth.deleteUser();
           FullScreenLoader.stopLoadingDialog();
 
-          Get.offAll(() => LoginScreen());
+          // Add small delay to ensure dialog is closed
+          await Future.delayed(Duration(milliseconds: 100));
+          Get.offAll(() => const LoginScreen());
         } else {
-          FullScreenLoader.stopLoadingDialog();
-          Get.to(() => ReAuthLoginForm(), preventDuplicates: false);
+          // For email/password auth
+          Get.to(() => const ReAuthLoginForm());
         }
       }
     } catch (e) {
       FullScreenLoader.stopLoadingDialog();
       Loader.errorSnackbar(message: e.toString(), title: 'Error');
-    } finally {
-      FullScreenLoader.stopLoadingDialog();
     }
   }
 

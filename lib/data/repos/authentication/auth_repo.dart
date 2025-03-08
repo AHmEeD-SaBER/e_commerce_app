@@ -1,5 +1,5 @@
 import 'package:e_commerce_app/bottom_nav_bar.dart';
-import 'package:e_commerce_app/data/repos/authentication/user/user_repo.dart';
+import 'package:e_commerce_app/data/repos/user/user_repo.dart';
 import 'package:e_commerce_app/features/authentication/screens/login/login.dart';
 import 'package:e_commerce_app/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:e_commerce_app/features/authentication/screens/signup_verfication/email_verification.dart';
@@ -106,8 +106,12 @@ class AuthRepo extends GetxController {
             ));
       }
     } else {
-      deviceStorage.writeIfNull('isFirstTime', true);
-      if (deviceStorage.read('isFirstTime')) {
+      // Check if it's first time
+      final isFirstTime = deviceStorage.read('isFirstTime') ?? true;
+
+      if (isFirstTime) {
+        // Set isFirstTime to false after showing onboarding
+        deviceStorage.write('isFirstTime', false);
         Get.offAll(() => OnboardingScreen());
       } else {
         Get.offAll(() => LoginScreen());
@@ -162,6 +166,8 @@ class AuthRepo extends GetxController {
     try {
       await UserRepo.instance.deleteUser();
       await _auth.currentUser?.delete();
+      Loader.successSnackBar(
+          title: 'Success', message: 'Account deleted successfully');
     } on FirebaseAuthException catch (e) {
       Loader.errorSnackbar(
           title: 'Error',

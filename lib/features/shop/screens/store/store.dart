@@ -3,6 +3,7 @@ import 'package:e_commerce_app/common/widgets/appbar/tabBar.dart';
 import 'package:e_commerce_app/common/widgets/cart_counter_icon.dart';
 import 'package:e_commerce_app/common/widgets/grid_lay_out.dart';
 import 'package:e_commerce_app/common/widgets/search_container.dart';
+import 'package:e_commerce_app/features/shop/controllers/categories_controller.dart';
 import 'package:e_commerce_app/features/shop/screens/all_products/all_brands.dart';
 import 'package:e_commerce_app/features/shop/screens/cart/cart_screen.dart';
 import 'package:e_commerce_app/common/widgets/section_heading.dart';
@@ -19,8 +20,10 @@ class Store extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CategoriesController());
+    controller.fetchAllCategories();
     return DefaultTabController(
-      length: 5,
+      length: controller.categories.length,
       child: Scaffold(
         appBar: CustomAppbar(
           title:
@@ -50,7 +53,6 @@ class Store extends StatelessWidget {
                 flexibleSpace: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                   child: ListView(
-                    // physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     children: [
                       SizedBox(
@@ -74,157 +76,6 @@ class Store extends StatelessWidget {
                                     noProducts: '245',
                                     isVerified: T,
                                     brandImage: 'assets/icons/brands/nike.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Adidas',
-                                    maxWeight: 0.3,
-                                    noProducts: '367',
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/adidas-logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Zara',
-                                    noProducts: '32',
-                                    maxWeight: 0.3,
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/zara-logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Ikea',
-                                    noProducts: '120',
-                                    maxWeight: 0.3,
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/ikea_logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Jordan',
-                                    maxWeight: 0.3,
-                                    noProducts: '245',
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/jordan-logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Acer',
-                                    maxWeight: 0.3,
-                                    noProducts: '367',
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/acer_logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Puma',
-                                    noProducts: '32',
-                                    maxWeight: 0.3,
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/puma-logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Herman Miller',
-                                    noProducts: '120',
-                                    maxWeight: 0.25,
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/herman-miller-logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Apple',
-                                    noProducts: '120',
-                                    maxWeight: 0.3,
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/apple-logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Kenwood',
-                                    noProducts: '120',
-                                    maxWeight: 0.3,
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/kenwood-logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Nike',
-                                    maxWeight: 0.3,
-                                    noProducts: '245',
-                                    isVerified: T,
-                                    brandImage: 'assets/icons/brands/nike.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Adidas',
-                                    maxWeight: 0.3,
-                                    noProducts: '367',
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/adidas-logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Zara',
-                                    noProducts: '32',
-                                    maxWeight: 0.3,
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/zara-logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Ikea',
-                                    noProducts: '120',
-                                    maxWeight: 0.3,
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/ikea_logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Jordan',
-                                    maxWeight: 0.3,
-                                    noProducts: '245',
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/jordan-logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Acer',
-                                    maxWeight: 0.3,
-                                    noProducts: '367',
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/acer_logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Puma',
-                                    noProducts: '32',
-                                    maxWeight: 0.3,
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/puma-logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Herman Miller',
-                                    noProducts: '120',
-                                    maxWeight: 0.25,
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/herman-miller-logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Apple',
-                                    noProducts: '120',
-                                    maxWeight: 0.3,
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/apple-logo.png',
-                                  ),
-                                  BrandCard(
-                                    name: 'Kenwood',
-                                    noProducts: '120',
-                                    maxWeight: 0.3,
-                                    isVerified: T,
-                                    brandImage:
-                                        'assets/icons/brands/kenwood-logo.png',
                                   ),
                                 ],
                                 title: 'Brands',
@@ -276,27 +127,19 @@ class Store extends StatelessWidget {
                   ),
                 ),
                 bottom: CustomTabBar(
-                  tabs: [
-                    Text('Sports'),
-                    Text('Furniture'),
-                    Text('Cloths'),
-                    Text('Electronics'),
-                    Text('Cosmetics'),
-                  ],
+                  tabs: controller.categories
+                      .map((e) => Tab(text: e.name))
+                      .toList(),
                 ),
               ),
             ];
           },
           body: TabBarView(
-            children: [
-              TabPage(),
-              TabPage(),
-              TabPage(),
-              TabPage(),
-              TabPage(),
-              TabPage(),
-            ],
-          ),
+              children: controller.categories
+                  .map((e) => TabPage(
+                        category: e,
+                      ))
+                  .toList()),
         ),
       ),
     );

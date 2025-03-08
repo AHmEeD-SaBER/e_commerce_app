@@ -1,5 +1,5 @@
 import 'package:e_commerce_app/data/repos/authentication/auth_repo.dart';
-import 'package:e_commerce_app/data/repos/authentication/user/user_repo.dart';
+import 'package:e_commerce_app/data/repos/user/user_repo.dart';
 import 'package:e_commerce_app/features/authentication/models/user.dart';
 import 'package:e_commerce_app/features/authentication/screens/signup_verfication/email_verification.dart';
 import 'package:e_commerce_app/utils/helpers/network_manager.dart';

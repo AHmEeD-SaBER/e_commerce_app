@@ -22,7 +22,7 @@ class SlidableList extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.only(right: 10),
+        padding: const EdgeInsets.only(right: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -37,7 +37,7 @@ class SlidableList extends StatelessWidget {
               child: Center(
                 child: Image.asset(
                   image,
-                  color: iconColor ?? CustomColors.black,
+                  color: iconColor ?? Colors.black,
                 ),
               ),
             ),
@@ -45,7 +45,7 @@ class SlidableList extends StatelessWidget {
               height: 7,
             ),
             SizedBox(
-              width: 56,
+              width: 70,
               child: Text(
                 title,
                 maxLines: 1,

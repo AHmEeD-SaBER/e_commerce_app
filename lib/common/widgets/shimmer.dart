@@ -17,19 +17,19 @@ class ShimmerEffect extends StatelessWidget {
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
         baseColor: (DeviceUtility.isDarkMood(context)
-            ? Colors.grey[850]!
-            : Colors.grey[300]!),
+            ? const Color.fromARGB(172, 143, 143, 143)!
+            : const Color.fromARGB(206, 224, 224, 224)!),
         highlightColor: (DeviceUtility.isDarkMood(context)
-            ? Colors.grey[700]!
-            : Colors.grey[100]!),
+            ? const Color.fromARGB(167, 97, 97, 97)!
+            : const Color.fromARGB(207, 245, 245, 245)!),
         child: Container(
           width: width,
           height: height,
           decoration: BoxDecoration(
               color: color ??
                   (DeviceUtility.isDarkMood(context)
-                      ? CustomColors.darkGrey
-                      : CustomColors.grey),
+                      ? const Color.fromARGB(125, 224, 224, 224)
+                      : const Color.fromARGB(188, 224, 224, 224)),
               borderRadius: BorderRadius.circular(radius)),
         ));
   }

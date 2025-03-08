@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/common/widgets/grid_lay_out.dart';
 import 'package:e_commerce_app/common/widgets/product_card_vertical.dart';
 import 'package:e_commerce_app/common/widgets/section_heading.dart';
+import 'package:e_commerce_app/features/shop/models/category.dart';
 import 'package:e_commerce_app/features/shop/screens/store/widgets/brand_show_case.dart';
 import 'package:e_commerce_app/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,10 @@ import 'package:get/get_connect/http/src/utils/utils.dart';
 class TabPage extends StatelessWidget {
   const TabPage({
     super.key,
+    required this.category,
   });
+
+  final Category category;
 
   @override
   Widget build(BuildContext context) {

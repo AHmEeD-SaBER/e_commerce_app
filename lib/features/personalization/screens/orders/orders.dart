@@ -21,13 +21,16 @@ class OrdersScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(24),
-          child: ListView.separated(
-              shrinkWrap: true,
-              itemBuilder: (_, indx) => OrderItem(),
-              separatorBuilder: (_, __) => SizedBox(
-                    height: 26,
-                  ),
-              itemCount: 3),
+          child: SizedBox(
+            width: DeviceUtility.getScreenWidth(context) * 0.9,
+            child: ListView.separated(
+                shrinkWrap: true,
+                itemBuilder: (_, indx) => OrderItem(),
+                separatorBuilder: (_, __) => SizedBox(
+                      height: 26,
+                    ),
+                itemCount: 3),
+          ),
         ),
       ),
     );
@@ -71,19 +74,22 @@ class OrderItem extends StatelessWidget {
           ),
           Row(
             children: [
-              InfoRow(
-                  icon: Iconsax.ticket,
-                  info: 'Order',
-                  value: '[#16453]',
-                  titleStyle: Theme.of(context).textTheme.labelMedium!),
-              SizedBox(
-                width: 70,
+              Expanded(
+                flex: 2,
+                child: InfoRow(
+                    icon: Iconsax.ticket,
+                    info: 'Order',
+                    value: '[#16453]',
+                    titleStyle: Theme.of(context).textTheme.labelMedium!),
               ),
-              InfoRow(
-                  icon: Iconsax.calendar,
-                  info: 'Shipping Date',
-                  value: '07 Nov 2025',
-                  titleStyle: Theme.of(context).textTheme.labelMedium!),
+              Expanded(
+                flex: 2,
+                child: InfoRow(
+                    icon: Iconsax.calendar,
+                    info: 'Shipping Date',
+                    value: '07 Nov 2025',
+                    titleStyle: Theme.of(context).textTheme.labelMedium!),
+              ),
             ],
           )
         ],
@@ -109,8 +115,11 @@ class InfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Icon(icon),
+        Icon(
+          icon,
+        ),
         SizedBox(
           width: 10,
         ),
