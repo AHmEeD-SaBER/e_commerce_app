@@ -24,7 +24,7 @@ class AutoSlider extends StatelessWidget {
             autoPlay: true,
             autoPlayCurve: Curves.easeIn,
             autoPlayAnimationDuration: Duration(milliseconds: 500),
-            height: 230,
+            height: 200,
             onPageChanged: (index, reason) =>
                 controller.onCarousalChange(index),
             viewportFraction: 1,
