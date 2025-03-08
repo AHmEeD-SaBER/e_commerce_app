@@ -34,7 +34,7 @@ class ProductImagesSlider extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    height: 400,
+                    height: 300,
                     margin:
                         EdgeInsets.only(top: DeviceUtility.getAppBarHeight()),
                     child: Container(
