@@ -55,7 +55,7 @@ class ProductImagesSlider extends StatelessWidget {
               ),
               Container(
                 height: 100,
-                margin: const EdgeInsets.only(bottom: 30),
+                margin: const EdgeInsets.only(bottom: 30, left: 20),
                 child: ListView.separated(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
