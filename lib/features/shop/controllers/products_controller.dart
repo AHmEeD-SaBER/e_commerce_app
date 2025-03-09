@@ -9,6 +9,7 @@ class ProductsController extends GetxController {
   final userController = UserController.instance;
 
   final products = <Product>[].obs;
+  final productsByCategory = <Product>[].obs;
   final isLoading = false.obs;
   final favoriteProducts = <String>[].obs;
 
@@ -38,7 +39,7 @@ class ProductsController extends GetxController {
 
   Future<void> fetchProductsByCategory(String categoryId) async {
     isLoading.value = true;
-    products.value = await repo.fetchProductsByCategory(categoryId);
+    productsByCategory.value = await repo.fetchProductsByCategory(categoryId);
     isLoading.value = false;
     // Ensure favorites are loaded after products
     await ensureFavoritesLoaded();

@@ -2,7 +2,6 @@ import 'package:e_commerce_app/common/widgets/appbar/appbar.dart';
 import 'package:e_commerce_app/common/widgets/circular_icon.dart';
 import 'package:e_commerce_app/common/widgets/grid_lay_out.dart';
 import 'package:e_commerce_app/common/widgets/product_card_vertical.dart';
-import 'package:e_commerce_app/features/shop/screens/all_products/all_products.dart';
 import 'package:e_commerce_app/features/shop/screens/home/home.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
 import 'package:e_commerce_app/utils/device/device_utility.dart';
@@ -72,8 +71,7 @@ class WishList extends StatelessWidget {
                           return ProductCardVertical(
                               product: product,
                               isFav: productsController
-                                  .isProductFavorite(productId),
-                              userId: userController.user.value.id);
+                                  .isProductFavorite(productId));
                         }).toList(),
                       ),
           ),

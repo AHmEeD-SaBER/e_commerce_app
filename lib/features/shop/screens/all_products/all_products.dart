@@ -35,22 +35,22 @@ class AllScreen extends StatelessWidget {
           child: Column(
             children: [
               if (showBrand)
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.grey),
-                      color: DeviceUtility.isDarkMood(context)
-                          ? CustomColors.black
-                          : CustomColors.grey),
-                  child: BrandCard(
-                      name: 'Nike',
-                      noProducts: '25',
-                      brandImage: 'assets/icons/brands/nike.png',
-                      onPressed: () {}),
+                // Container(
+                //   decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(15),
+                //       border: Border.all(color: Colors.grey),
+                //       color: DeviceUtility.isDarkMood(context)
+                //           ? CustomColors.black
+                //           : CustomColors.grey),
+                //   child: BrandCard(
+                //       name: 'Nike',
+                //       noProducts: '25',
+                //       brandImage: 'assets/icons/brands/nike.png',
+                //       onPressed: () {}),
+                // ),
+                SizedBox(
+                  height: 20,
                 ),
-              SizedBox(
-                height: 20,
-              ),
               if (showFilterBar)
                 DropdownButtonFormField2(
                   items: [

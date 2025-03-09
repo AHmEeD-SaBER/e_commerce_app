@@ -1,9 +1,6 @@
 import 'package:e_commerce_app/common/widgets/grid_lay_out.dart';
 import 'package:e_commerce_app/common/widgets/shimmer.dart';
-import 'package:e_commerce_app/features/personalization/controllers/user_controller.dart';
-import 'package:e_commerce_app/features/shop/controllers/brand_controller.dart';
 import 'package:e_commerce_app/features/shop/controllers/products_controller.dart';
-import 'package:e_commerce_app/features/shop/models/brand.dart';
 import 'package:e_commerce_app/features/shop/screens/home/widgets/auto_slider.dart';
 import 'package:e_commerce_app/features/shop/screens/home/widgets/home_app_bar.dart';
 import 'package:e_commerce_app/features/shop/screens/home/widgets/home_categories.dart';
@@ -22,7 +19,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productsController = Get.put(ProductsController());
-    final userController = Get.put(UserController());
 
     // Load products if needed
     if (productsController.products.isEmpty) {
@@ -102,7 +98,6 @@ class HomeScreen extends StatelessWidget {
                                   product: product,
                                   isFav: productsController
                                       .isProductFavorite(product.id),
-                                  userId: userController.user.value.id,
                                 ),
                               );
                             }).toList(),

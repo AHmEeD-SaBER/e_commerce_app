@@ -3,6 +3,7 @@ import 'package:e_commerce_app/common/widgets/appbar/tabBar.dart';
 import 'package:e_commerce_app/common/widgets/cart_counter_icon.dart';
 import 'package:e_commerce_app/common/widgets/grid_lay_out.dart';
 import 'package:e_commerce_app/common/widgets/search_container.dart';
+import 'package:e_commerce_app/features/shop/controllers/brand_controller.dart';
 import 'package:e_commerce_app/features/shop/controllers/categories_controller.dart';
 import 'package:e_commerce_app/features/shop/screens/all_products/all_brands.dart';
 import 'package:e_commerce_app/features/shop/screens/cart/cart_screen.dart';
@@ -21,9 +22,13 @@ class Store extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CategoriesController());
+    final brandsController = Get.put(BrandController());
+    if (brandsController.brands.isEmpty) brandsController.fetchAllBrands();
     if (controller.categories.isEmpty) controller.fetchAllCategories();
+    final categories =
+        controller.categories.where((e) => e.parentId.isEmpty).toList();
     return DefaultTabController(
-      length: controller.categories.length,
+      length: categories.length,
       child: Scaffold(
         appBar: CustomAppbar(
           title:
@@ -68,20 +73,20 @@ class Store extends StatelessWidget {
                       SectionHeading(
                         title: 'Featured Brands',
                         onPressed: () {
-                          Get.to(() => AllBrands(
-                                items: [
-                                  BrandCard(
-                                    name: 'Nike',
-                                    maxWeight: 0.3,
-                                    noProducts: '245',
-                                    isVerified: T,
-                                    brandImage: 'assets/icons/brands/nike.png',
-                                  ),
-                                ],
-                                title: 'Brands',
-                                gridHight: 80,
-                                gridSpacing: 10,
-                              ));
+                          // Get.to(() => AllBrands(
+                          //       items: [
+                          //         BrandCard(
+                          //           name: 'Nike',
+                          //           maxWeight: 0.3,
+                          //           noProducts: '245',
+                          //           isVerified: T,
+                          //           brandImage: 'assets/icons/brands/nike.png',
+                          //         ),
+                          //       ],
+                          //       title: 'Brands',
+                          //       gridHight: 80,
+                          //       gridSpacing: 10,
+                          //     ));
                         },
                         buttonTitle: 'View All',
                         showActionBtn: T,
@@ -90,36 +95,11 @@ class Store extends StatelessWidget {
                         paddingRigth: 10,
                       ),
                       GridLayOut(
-                        items: [
-                          BrandCard(
-                            name: 'Nike',
-                            maxWeight: 50,
-                            noProducts: '245',
-                            isVerified: T,
-                            brandImage: 'assets/icons/brands/nike.png',
-                          ),
-                          BrandCard(
-                            name: 'Adidas',
-                            maxWeight: 50,
-                            noProducts: '367',
-                            isVerified: T,
-                            brandImage: 'assets/icons/brands/adidas-logo.png',
-                          ),
-                          BrandCard(
-                            name: 'Zara',
-                            noProducts: '32',
-                            maxWeight: 50,
-                            isVerified: T,
-                            brandImage: 'assets/icons/brands/zara-logo.png',
-                          ),
-                          BrandCard(
-                            name: 'Ikea',
-                            noProducts: '120',
-                            maxWeight: 50,
-                            isVerified: T,
-                            brandImage: 'assets/icons/brands/ikea_logo.png',
-                          ),
-                        ],
+                        items: brandsController.brands
+                            .where((e) => e.isFeatured)
+                            .toList()
+                            .map((e) => BrandCard(brand: e))
+                            .toList(),
                         height: 80,
                         crossAxisSpacing: 10,
                       )
@@ -127,15 +107,13 @@ class Store extends StatelessWidget {
                   ),
                 ),
                 bottom: CustomTabBar(
-                  tabs: controller.categories
-                      .map((e) => Tab(text: e.name))
-                      .toList(),
+                  tabs: categories.map((e) => Tab(text: e.name)).toList(),
                 ),
               ),
             ];
           },
           body: TabBarView(
-              children: controller.categories
+              children: categories
                   .map((e) => TabPage(
                         category: e,
                       ))

@@ -21,7 +21,6 @@ class ProductPrice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDiscounted = (discount > 0);
-    print(isDiscounted);
     if (isHorizontal) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +45,7 @@ class ProductPrice extends StatelessWidget {
               constraints: BoxConstraints(
                   maxWidth: MediaQuery.of(context).size.width * widthRatio),
               child: Text(
-                '$currency${(double.parse(price) * (discount / 100)).toStringAsFixed(2)}',
+                '$currency${(double.parse(price) - (double.parse(price) * (discount / 100))).toStringAsFixed(2)}',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: bigerDiscountPriceSize

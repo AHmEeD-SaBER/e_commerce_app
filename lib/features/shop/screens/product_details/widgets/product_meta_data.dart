@@ -19,13 +19,25 @@ class ProductMetaData extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ProductPrice(
-          isHorizontal: false,
-          bigerDiscountPriceSize: true,
-          price: product.price.toString(),
-          currency: '\$',
-          discount: product.sale,
-          widthRatio: 0.5,
+        Row(
+          children: [
+            if (product.sale > 0)
+              SaleContainer(
+                amount: '${product.sale}%',
+              ),
+            if (product.sale > 0)
+              SizedBox(
+                width: 10,
+              ),
+            ProductPrice(
+              isHorizontal: false,
+              bigerDiscountPriceSize: true,
+              price: product.price.toString(),
+              currency: '\$',
+              discount: product.sale,
+              widthRatio: 0.5,
+            ),
+          ],
         ),
         const SizedBox(height: 10),
         ProductTitle(

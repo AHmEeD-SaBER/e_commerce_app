@@ -1,4 +1,6 @@
+import 'package:e_commerce_app/common/widgets/brand_container.dart';
 import 'package:e_commerce_app/common/widgets/circle_image_container.dart';
+import 'package:e_commerce_app/features/shop/models/brand.dart';
 import 'package:e_commerce_app/features/shop/screens/all_products/all_products.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
 import 'package:e_commerce_app/utils/device/device_utility.dart';
@@ -9,18 +11,12 @@ import 'package:get/get_connect/http/src/utils/utils.dart';
 class BrandCard extends StatelessWidget {
   const BrandCard(
       {super.key,
-      required this.name,
-      this.isVerified = T,
-      required this.noProducts,
-      required this.brandImage,
+      required this.brand,
       this.showBorders = true,
       this.borderWeight = 2,
       this.maxWeight = 100,
       this.onPressed});
-  final String name;
-  final bool isVerified;
-  final String noProducts;
-  final String brandImage;
+  final Brand brand;
   final VoidCallback? onPressed;
   final bool showBorders;
   final double borderWeight;
@@ -58,7 +54,7 @@ class BrandCard extends StatelessWidget {
           children: [
             Flexible(
               child: CircleImageContainer(
-                image: brandImage,
+                image: brand.icon,
                 height: 60,
                 width: 60,
               ),
@@ -68,14 +64,13 @@ class BrandCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // BrandContainer(
-                  //   brand: name,
-                  //   maxWeight: maxWeight,
-                  //   isVerified: isVerified,
-                  //   style: Theme.of(context).textTheme.titleLarge,
-                  // ),
+                  BrandContainer(
+                    brand: brand,
+                    maxWeight: maxWeight,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
                   Text(
-                    '$noProducts Products',
+                    '${brand.noProducts} Products',
                     style: Theme.of(context).textTheme.labelMedium,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,

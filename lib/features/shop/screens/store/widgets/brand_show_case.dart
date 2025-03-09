@@ -1,3 +1,5 @@
+import 'package:e_commerce_app/features/shop/models/brand.dart';
+import 'package:e_commerce_app/features/shop/models/product.dart';
 import 'package:e_commerce_app/features/shop/screens/store/widgets/brand_card.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
 import 'package:e_commerce_app/utils/device/device_utility.dart';
@@ -7,21 +9,16 @@ class BrandShowCase extends StatelessWidget {
   const BrandShowCase({
     super.key,
     required this.brand,
-    required this.isVerified,
-    required this.noProducts,
-    required this.brandImage,
     required this.onPressed,
     required this.products,
   });
-  final String brand;
-  final bool isVerified;
-  final String noProducts;
-  final String brandImage;
+  final Brand brand;
   final VoidCallback onPressed;
-  final List<String> products;
+  final List<Product> products;
 
   @override
   Widget build(BuildContext context) {
+    print(products.length);
     return Container(
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -38,11 +35,8 @@ class BrandShowCase extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: BrandCard(
-              name: brand,
-              noProducts: noProducts,
+              brand: brand,
               showBorders: false,
-              isVerified: isVerified,
-              brandImage: brandImage,
               onPressed: onPressed,
             ),
           ),
@@ -64,7 +58,7 @@ class BrandShowCase extends StatelessWidget {
                     padding: EdgeInsets.all(8),
                     margin: EdgeInsets.symmetric(horizontal: 4, vertical: 5),
                     child: Image.asset(
-                      products[i],
+                      products[i].thumbnail,
                       fit: BoxFit.contain,
                     ),
                   ),

@@ -19,21 +19,15 @@ import 'package:iconsax/iconsax.dart';
 
 class ProductCardVertical extends StatelessWidget {
   const ProductCardVertical(
-      {super.key,
-      this.onPressed,
-      required this.product,
-      required this.isFav,
-      required this.userId});
+      {super.key, this.onPressed, required this.product, required this.isFav});
   final Product product;
   final VoidCallback? onPressed;
   final bool isFav;
-  final String userId;
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(BrandController());
     final productsController = Get.put(ProductsController());
-    final userController = UserController.instance;
 
     if (controller.brands.isEmpty) {
       controller.fetchAllBrands();

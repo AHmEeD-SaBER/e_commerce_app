@@ -21,5 +21,4 @@ class BrandController extends GetxController {
     isLoading.value = false;
     return brand;
   }
-
 }
