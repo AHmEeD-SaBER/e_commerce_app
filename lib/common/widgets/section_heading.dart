@@ -1,7 +1,5 @@
-import 'package:e_commerce_app/common/widgets/product_card_vertical.dart';
 import 'package:e_commerce_app/features/shop/screens/all_products/all_products.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
-import 'package:e_commerce_app/utils/constants/image_strings.dart';
 import 'package:e_commerce_app/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

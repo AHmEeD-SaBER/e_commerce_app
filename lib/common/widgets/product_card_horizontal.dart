@@ -5,11 +5,9 @@ import 'package:e_commerce_app/common/widgets/product_price.dart';
 import 'package:e_commerce_app/common/widgets/product_title.dart';
 import 'package:e_commerce_app/common/widgets/sale_container.dart';
 import 'package:e_commerce_app/features/shop/models/brand.dart';
-import 'package:e_commerce_app/features/shop/screens/product_details/product_details.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
 import 'package:e_commerce_app/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProductCardHorizontal extends StatelessWidget {
@@ -99,7 +97,6 @@ class ProductCardHorizontal extends StatelessWidget {
                               Expanded(
                                 flex: 2,
                                 child: ProductPrice(
-                                  isHorizontal: true,
                                   price: price.toString(),
                                   currency: '\$',
                                   discount: 0.23,

@@ -9,7 +9,6 @@ import 'package:e_commerce_app/common/widgets/section_heading.dart';
 import 'package:e_commerce_app/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class Checkout extends StatelessWidget {
   const Checkout({super.key});

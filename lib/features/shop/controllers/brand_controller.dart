@@ -22,8 +22,4 @@ class BrandController extends GetxController {
     return brand;
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
 }

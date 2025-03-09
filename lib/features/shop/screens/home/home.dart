@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/common/widgets/grid_lay_out.dart';
 import 'package:e_commerce_app/common/widgets/shimmer.dart';
+import 'package:e_commerce_app/features/personalization/controllers/user_controller.dart';
 import 'package:e_commerce_app/features/shop/controllers/brand_controller.dart';
 import 'package:e_commerce_app/features/shop/controllers/products_controller.dart';
 import 'package:e_commerce_app/features/shop/models/brand.dart';
@@ -10,11 +11,9 @@ import 'package:e_commerce_app/features/shop/screens/home/widgets/primary_header
 import 'package:e_commerce_app/common/widgets/search_container.dart';
 import 'package:e_commerce_app/common/widgets/product_card_vertical.dart';
 import 'package:e_commerce_app/common/widgets/section_heading.dart';
-import 'package:e_commerce_app/utils/constants/image_strings.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -22,12 +21,18 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final contoroller = Get.put(ProductsController());
-    final brandController = Get.put(BrandController());
-    if (brandController.brands.isEmpty) {
-      brandController.fetchAllBrands();
+    final productsController = Get.put(ProductsController());
+    final userController = Get.put(UserController());
+
+    // Load products if needed
+    if (productsController.products.isEmpty) {
+      // This will also ensure favorites are loaded
+      productsController.fetchFeaturedProducts();
+    } else {
+      // If products are already loaded, make sure favorites are loaded too
+      productsController.ensureFavoritesLoaded();
     }
-    contoroller.fetchFeaturedProducts();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -79,21 +84,26 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   Obx(
-                    () => contoroller.isLoading.value ||
-                            brandController.isLoading.value
+                    () => productsController.isLoading.value
                         ? ProductShimmer()
                         : GridLayOut(
-                            items: contoroller.products.map((product) {
-                              // Find brand safely with null check
-                              final brand = brandController.brands
-                                      .firstWhereOrNull(
-                                    (brand) => brand.id == product.brandId,
-                                  ) ??
-                                  Brand
-                                      .empty(); // Provide default empty brand if not found
+                            items: productsController.products.map((product) {
+                              // print('product id: ' + product.id);
+                              // print('favorite products: ' +
+                              //     productsController.favoriteProducts
+                              //         .toString());
+                              // print('is product favorite: ' +
+                              //     productsController
+                              //         .isProductFavorite(product.id)
+                              //         .toString());
 
-                              return ProductCardVertical(
-                                product: product,
+                              return Obx(
+                                () => ProductCardVertical(
+                                  product: product,
+                                  isFav: productsController
+                                      .isProductFavorite(product.id),
+                                  userId: userController.user.value.id,
+                                ),
                               );
                             }).toList(),
                           ),

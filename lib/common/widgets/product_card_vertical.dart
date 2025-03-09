@@ -1,12 +1,12 @@
-import 'dart:ffi';
-
 import 'package:e_commerce_app/common/widgets/brand_container.dart';
 import 'package:e_commerce_app/common/widgets/circular_icon.dart';
 import 'package:e_commerce_app/common/widgets/curved_image_container.dart';
 import 'package:e_commerce_app/common/widgets/product_price.dart';
 import 'package:e_commerce_app/common/widgets/product_title.dart';
 import 'package:e_commerce_app/common/widgets/sale_container.dart';
+import 'package:e_commerce_app/features/personalization/controllers/user_controller.dart';
 import 'package:e_commerce_app/features/shop/controllers/brand_controller.dart';
+import 'package:e_commerce_app/features/shop/controllers/products_controller.dart';
 import 'package:e_commerce_app/features/shop/models/brand.dart';
 import 'package:e_commerce_app/features/shop/models/product.dart';
 import 'package:e_commerce_app/features/shop/screens/product_details/product_details.dart';
@@ -14,18 +14,27 @@ import 'package:e_commerce_app/utils/constants/colors.dart';
 import 'package:e_commerce_app/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import 'package:iconsax/iconsax.dart';
 
 class ProductCardVertical extends StatelessWidget {
-  const ProductCardVertical({super.key, this.onPressed, required this.product});
+  const ProductCardVertical(
+      {super.key,
+      this.onPressed,
+      required this.product,
+      required this.isFav,
+      required this.userId});
   final Product product;
   final VoidCallback? onPressed;
+  final bool isFav;
+  final String userId;
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(BrandController());
+    final productsController = Get.put(ProductsController());
+    final userController = UserController.instance;
+
     if (controller.brands.isEmpty) {
       controller.fetchAllBrands();
     }
@@ -84,14 +93,26 @@ class ProductCardVertical extends StatelessWidget {
                       Positioned(
                         top: 0,
                         right: 0,
-                        child: CircularIcon(
-                          icon: Iconsax.heart,
-                          onPressed: () {},
-                          iconColor: DeviceUtility.isDarkMood(context)
-                              ? CustomColors.white
-                              : Colors.black,
-                        ),
-                      )
+                        child: Obx(() {
+                          final isFav =
+                              productsController.isProductFavorite(product.id);
+                          return CircularIcon(
+                            icon: isFav ? Iconsax.heart5 : Iconsax.heart,
+                            onPressed: () async {
+                              if (isFav) {
+                                await productsController
+                                    .removeFromFavorite(product.id);
+                              } else {
+                                await productsController
+                                    .addToFavorite(product.id);
+                              }
+                            },
+                            iconColor: DeviceUtility.isDarkMood(context)
+                                ? CustomColors.white
+                                : Colors.black,
+                          );
+                        }),
+                      ),
                     ],
                   ),
                 ),
@@ -120,9 +141,12 @@ class ProductCardVertical extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ProductPrice(
-                          price: product.price.toString(),
-                          currency: '\$',
+                        Flexible(
+                          child: ProductPrice(
+                            price: product.price.toString(),
+                            discount: product.sale,
+                            currency: '\$',
+                          ),
                         ),
                         Container(
                           decoration: BoxDecoration(

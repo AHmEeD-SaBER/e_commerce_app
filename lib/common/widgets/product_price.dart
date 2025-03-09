@@ -7,9 +7,9 @@ class ProductPrice extends StatelessWidget {
     required this.price,
     required this.currency,
     this.widthRatio = 0.3,
-    this.bigerDiscountPriceSize = true,
+    this.bigerDiscountPriceSize = false,
     this.discount = 0.0,
-    this.isHorizontal = false,
+    this.isHorizontal = true,
   });
   final String price;
   final String currency;
@@ -21,6 +21,7 @@ class ProductPrice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDiscounted = (discount > 0);
+    print(isDiscounted);
     if (isHorizontal) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +32,7 @@ class ProductPrice extends StatelessWidget {
               '$currency$price',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   decoration: isDiscounted ? TextDecoration.lineThrough : null,
                   color: isDiscounted ? CustomColors.darkGrey : null),
             ),
@@ -52,7 +53,7 @@ class ProductPrice extends StatelessWidget {
                     ? Theme.of(context).textTheme.headlineMedium!.copyWith(
                         color: CustomColors.primaryColor,
                         fontWeight: FontWeight.bold)
-                    : Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    : Theme.of(context).textTheme.titleLarge!.copyWith(
                         color: CustomColors.primaryColor,
                         fontWeight: FontWeight.bold),
               ),
@@ -71,7 +72,7 @@ class ProductPrice extends StatelessWidget {
             '$currency$price',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 decoration: isDiscounted ? TextDecoration.lineThrough : null,
                 color: isDiscounted ? CustomColors.darkGrey : null),
           ),
@@ -92,7 +93,7 @@ class ProductPrice extends StatelessWidget {
                   ? Theme.of(context).textTheme.headlineMedium!.copyWith(
                       color: CustomColors.primaryColor,
                       fontWeight: FontWeight.bold)
-                  : Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  : Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: CustomColors.primaryColor,
                       fontWeight: FontWeight.bold),
             ),

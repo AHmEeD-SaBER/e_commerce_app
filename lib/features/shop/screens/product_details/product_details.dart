@@ -7,7 +7,6 @@ import 'package:e_commerce_app/features/shop/screens/product_details/widgets/pro
 import 'package:e_commerce_app/common/widgets/section_heading.dart';
 import 'package:e_commerce_app/features/shop/screens/reviews/product_reviews.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
-import 'package:e_commerce_app/utils/constants/image_strings.dart';
 import 'package:e_commerce_app/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,6 +28,7 @@ class ProductDetails extends StatelessWidget {
             ProductImagesSlider(
               iamges: List<String>.from(product.images),
               thumbnail: product.thumbnail,
+              productId: product.id,
             ),
             Padding(
               padding: EdgeInsets.only(right: 24, left: 24, bottom: 24),

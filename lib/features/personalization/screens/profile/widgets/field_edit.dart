@@ -1,6 +1,5 @@
 import 'package:e_commerce_app/common/widgets/appbar/appbar.dart';
 import 'package:e_commerce_app/features/personalization/controllers/update_name_controller.dart';
-import 'package:e_commerce_app/features/personalization/controllers/user_controller.dart';
 import 'package:e_commerce_app/utils/device/device_utility.dart';
 import 'package:e_commerce_app/utils/validators/validator.dart';
 import 'package:flutter/material.dart';

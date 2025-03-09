@@ -3,6 +3,7 @@ import 'package:e_commerce_app/data/repos/user/user_repo.dart';
 import 'package:e_commerce_app/features/authentication/screens/login/login.dart';
 import 'package:e_commerce_app/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:e_commerce_app/features/authentication/screens/signup_verfication/email_verification.dart';
+import 'package:e_commerce_app/features/personalization/controllers/user_controller.dart';
 import 'package:e_commerce_app/utils/popups/loader.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -64,8 +65,16 @@ class AuthRepo extends GetxController {
 
   Future<UserCredential> login(String email, String password) async {
     try {
-      return await _auth.signInWithEmailAndPassword(
+      // Sign in with email and password
+      final userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
+
+      // Ensure we fetch fresh user data for the current user
+      if (Get.isRegistered<UserController>()) {
+        await Get.find<UserController>().fetchUserData();
+      }
+
+      return userCredential;
     } on FirebaseAuthException catch (e) {
       Loader.errorSnackbar(
           title: 'Error',
@@ -83,7 +92,15 @@ class AuthRepo extends GetxController {
       final credential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
 
-      return await _auth.signInWithCredential(credential);
+      // Sign in with Google credentials
+      final userCredential = await _auth.signInWithCredential(credential);
+
+      // Ensure we fetch fresh user data for the current user
+      if (Get.isRegistered<UserController>()) {
+        await Get.find<UserController>().fetchUserData();
+      }
+
+      return userCredential;
     } on FirebaseAuthException catch (e) {
       Loader.errorSnackbar(
           title: 'Error',
@@ -95,6 +112,11 @@ class AuthRepo extends GetxController {
   void screenRedirect() async {
     final user = _auth.currentUser;
     if (user != null) {
+      // Ensure we fetch fresh user data for the current user
+      if (Get.isRegistered<UserController>()) {
+        await Get.find<UserController>().fetchUserData();
+      }
+
       if (user.emailVerified) {
         Get.offAll(() => BottomNavBar());
       } else {
@@ -106,6 +128,11 @@ class AuthRepo extends GetxController {
             ));
       }
     } else {
+      // Clear any existing user data
+      if (Get.isRegistered<UserController>()) {
+        Get.find<UserController>().clearUserData();
+      }
+
       // Check if it's first time
       final isFirstTime = deviceStorage.read('isFirstTime') ?? true;
 
@@ -131,12 +158,24 @@ class AuthRepo extends GetxController {
 
   Future<void> logout() async {
     try {
+      // Clear any cached user data
+      Get.find<UserController>().clearUserData();
+
+      // Sign out from Firebase
+      await GoogleSignIn()
+          .signOut(); // Sign out from Google if signed in with Google
       await _auth.signOut();
+
+      // Navigate to login screen
       Get.offAll(() => LoginScreen());
     } on FirebaseAuthException catch (e) {
       Loader.errorSnackbar(
           title: 'Error',
           message: e.message ?? 'An unknown error occurred. Please try again.');
+    } catch (e) {
+      Loader.errorSnackbar(
+          title: 'Error',
+          message: 'An error occurred during logout. Please try again.');
     }
   }
 

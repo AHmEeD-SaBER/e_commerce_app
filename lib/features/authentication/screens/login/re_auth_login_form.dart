@@ -3,7 +3,6 @@ import 'package:e_commerce_app/features/personalization/controllers/user_control
 import 'package:e_commerce_app/utils/validators/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ReAuthLoginForm extends StatelessWidget {

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:e_commerce_app/data/repos/authentication/auth_repo.dart';
 import 'package:e_commerce_app/data/repos/user/user_repo.dart';
 import 'package:e_commerce_app/features/authentication/models/user.dart';
@@ -26,6 +24,13 @@ class UserController extends GetxController {
   @override
   void onReady() {
     fetchUserData();
+  }
+
+  /// Clear user data when logging out
+  void clearUserData() {
+    user.value = UserModel.empty();
+    email.clear();
+    password.clear();
   }
 
   Future<void> saveUser(UserCredential? userCredential) async {

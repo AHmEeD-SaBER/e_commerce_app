@@ -1,5 +1,4 @@
 import 'package:e_commerce_app/common/widgets/grid_lay_out.dart';
-import 'package:e_commerce_app/common/widgets/product_card_vertical.dart';
 import 'package:e_commerce_app/common/widgets/section_heading.dart';
 import 'package:e_commerce_app/features/shop/models/category.dart';
 import 'package:e_commerce_app/features/shop/screens/store/widgets/brand_show_case.dart';

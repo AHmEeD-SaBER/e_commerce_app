@@ -1,4 +1,3 @@
-import 'package:e_commerce_app/common/widgets/brand_container.dart';
 import 'package:e_commerce_app/common/widgets/circular_icon.dart';
 import 'package:e_commerce_app/common/widgets/curved_image_container.dart';
 import 'package:e_commerce_app/common/widgets/product_price.dart';

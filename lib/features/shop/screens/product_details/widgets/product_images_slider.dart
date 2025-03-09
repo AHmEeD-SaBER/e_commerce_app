@@ -1,8 +1,9 @@
 import 'package:e_commerce_app/common/widgets/appbar/appbar.dart';
+import 'package:e_commerce_app/common/widgets/circular_icon.dart';
 import 'package:e_commerce_app/common/widgets/curved_image_container.dart';
 import 'package:e_commerce_app/common/widgets/custom_clip_path.dart';
+import 'package:e_commerce_app/features/shop/controllers/products_controller.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
-import 'package:e_commerce_app/utils/constants/image_strings.dart';
 import 'package:e_commerce_app/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,13 +14,17 @@ class ProductImagesSlider extends StatelessWidget {
     super.key,
     required this.iamges,
     required this.thumbnail,
+    required this.productId,
   });
   final List<String> iamges;
   final String thumbnail;
+  final String productId;
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ImgSliderController());
+    final productsController = Get.put(ProductsController());
+
     return CustomClipPath(
       child: Container(
         width: double.infinity,
@@ -48,7 +53,24 @@ class ProductImagesSlider extends StatelessWidget {
                   CustomAppbar(
                     showBackArrow: true,
                     actions: [
-                      IconButton(onPressed: () {}, icon: Icon(Iconsax.heart))
+                      Obx(() {
+                        final isFav =
+                            productsController.isProductFavorite(productId);
+                        return CircularIcon(
+                          icon: isFav ? Iconsax.heart5 : Iconsax.heart,
+                          onPressed: () async {
+                            if (isFav) {
+                              await productsController
+                                  .removeFromFavorite(productId);
+                            } else {
+                              await productsController.addToFavorite(productId);
+                            }
+                          },
+                          iconColor: DeviceUtility.isDarkMood(context)
+                              ? CustomColors.white
+                              : CustomColors.black,
+                        );
+                      })
                     ],
                   ),
                 ],
