@@ -24,9 +24,9 @@ class Store extends StatelessWidget {
     final controller = Get.put(CategoriesController());
     final brandsController = Get.put(BrandController());
     if (brandsController.brands.isEmpty) brandsController.fetchAllBrands();
-    if (controller.categories.isEmpty) controller.fetchAllCategories();
-    final categories =
-        controller.categories.where((e) => e.parentId.isEmpty).toList();
+    if (controller.featuredCategories.isEmpty)
+      controller.fetchFeaturedCategories();
+    final categories = controller.featuredCategories;
     return DefaultTabController(
       length: categories.length,
       child: Scaffold(

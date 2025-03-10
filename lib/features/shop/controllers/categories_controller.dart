@@ -6,17 +6,27 @@ class CategoriesController extends GetxController {
   static CategoriesController get instance => Get.find();
   final _repo = Get.put(CatRepo());
 
-  RxList categories = <Category>[].obs;
   RxList featuredCategories = <Category>[].obs;
+  RxList subCategories = <Category>[].obs;
+  RxList mainCategories = <Category>[].obs;
   final isLoading = false.obs;
 
-  Future<void> fetchAllCategories() async {
+  Future<void> fetchFeaturedCategories() async {
     isLoading.value = true;
 
-    categories.value = await _repo.fetchAllCategories();
-    featuredCategories.value = categories
-        .where((cat) => cat.isFeatured && cat.parentId.isEmpty)
-        .toList();
+    featuredCategories.value = await _repo.fetchFeaturedCategories();
+    isLoading.value = false;
+  }
+
+  Future<void> fetchSubCategories(String catParentId) async {
+    isLoading.value = true;
+    subCategories.value = await _repo.fetchSubCategories(catParentId);
+    isLoading.value = false;
+  }
+
+  Future<void> fetchMainCategories() async {
+    isLoading.value = true;
+    mainCategories.value = await _repo.fetchMainCategories();
     isLoading.value = false;
   }
 }

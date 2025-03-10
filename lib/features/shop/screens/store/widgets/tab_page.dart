@@ -52,11 +52,11 @@ class TabPage extends StatelessWidget {
     }
 
     productsController.fetchAllProducts();
-    if (categoriesController.categories.isEmpty) {
-      categoriesController.fetchAllCategories();
+    if (categoriesController.mainCategories.isEmpty) {
+      categoriesController.fetchMainCategories();
     }
 
-    final subCategoriesIds = categoriesController.categories
+    final subCategoriesIds = categoriesController.mainCategories
         .where((e) => e.parentId == category.id)
         .map((e) => e.id)
         .toList();

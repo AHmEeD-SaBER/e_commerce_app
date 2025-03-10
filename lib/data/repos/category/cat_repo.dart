@@ -77,10 +77,41 @@ class CatRepo extends GetxController {
 
   final _db = FirebaseFirestore.instance;
 
-  Future<List<Category>> fetchAllCategories() async {
+  Future<List<Category>> fetchFeaturedCategories() async {
     try {
       final snapshot = await _db.collection('categories').get();
-      return snapshot.docs.map((doc) => Category.fromJson(doc)).toList();
+      return snapshot.docs
+          .map((doc) => Category.fromJson(doc))
+          .where((cat) => cat.isFeatured)
+          .toList();
+    } on FirebaseException catch (e) {
+      Loader.errorSnackbar(
+          title: 'Error', message: e.message ?? 'An error occurred');
+      rethrow;
+    }
+  }
+
+  Future<List<Category>> fetchSubCategories(String catParentId) async {
+    try {
+      final snapshot = await _db.collection('categories').get();
+      return snapshot.docs
+          .map((doc) => Category.fromJson(doc))
+          .where((cat) => cat.parentId == catParentId)
+          .toList();
+    } on FirebaseException catch (e) {
+      Loader.errorSnackbar(
+          title: 'Error', message: e.message ?? 'An error occurred');
+      rethrow;
+    }
+  }
+
+  Future<List<Category>> fetchMainCategories() async {
+    try {
+      final snapshot = await _db.collection('categories').get();
+      return snapshot.docs
+          .map((doc) => Category.fromJson(doc))
+          .where((cat) => cat.parentId.isEmpty)
+          .toList();
     } on FirebaseException catch (e) {
       Loader.errorSnackbar(
           title: 'Error', message: e.message ?? 'An error occurred');

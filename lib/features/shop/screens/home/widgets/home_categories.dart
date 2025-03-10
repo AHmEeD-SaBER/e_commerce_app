@@ -14,7 +14,8 @@ class HomeCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CategoriesController());
-    if (controller.featuredCategories.isEmpty) controller.fetchAllCategories();
+    if (controller.featuredCategories.isEmpty)
+      controller.fetchFeaturedCategories();
     final categories = controller.featuredCategories;
     return Padding(
       padding: EdgeInsets.only(left: 30),
@@ -46,7 +47,9 @@ class HomeCategories extends StatelessWidget {
                             'assets/icons/categories/${categories[indx].image}.png',
                         title: categories[indx].name,
                         onTap: () {
-                          Get.to(() => SubCategoriesScreen());
+                          Get.to(() => SubCategoriesScreen(
+                                catParent: categories[indx],
+                              ));
                         },
                         backgroundColor: Colors.transparent,
                       ),
