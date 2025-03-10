@@ -176,20 +176,31 @@ final List<Product> products = [
     ],
     isFeatured: true,
     attributes: {
-      'Color': [
-        {'Black/Red': 25},
-        {'Orange': 20},
-        {'White/Magenta': 15},
-        {'White/Red': 30}
-      ],
-      'Size': [
-        {'40': 10},
-        {'41': 15},
-        {'42': 20},
-        {'43': 20},
-        {'44': 15}
-      ],
+      'Color': ['Black/Red', 'Orange', 'White/Magenta', 'White/Red'],
+      'Size': ['40', '41', '42', '43', '44'],
     },
+    variations: [
+      {'Color': 'Black/Red', 'Size': '40', 'Quantity': 10},
+      {'Color': 'Black/Red', 'Size': '41', 'Quantity': 15},
+      {'Color': 'Black/Red', 'Size': '42', 'Quantity': 20},
+      {'Color': 'Black/Red', 'Size': '43', 'Quantity': 20},
+      {'Color': 'Black/Red', 'Size': '44', 'Quantity': 15},
+      {'Color': 'Orange', 'Size': '40', 'Quantity': 10},
+      {'Color': 'Orange', 'Size': '41', 'Quantity': 15},
+      {'Color': 'Orange', 'Size': '42', 'Quantity': 20},
+      {'Color': 'Orange', 'Size': '43', 'Quantity': 20},
+      {'Color': 'Orange', 'Size': '44', 'Quantity': 15},
+      {'Color': 'White/Magenta', 'Size': '40', 'Quantity': 10},
+      {'Color': 'White/Magenta', 'Size': '41', 'Quantity': 15},
+      {'Color': 'White/Magenta', 'Size': '42', 'Quantity': 20},
+      {'Color': 'White/Magenta', 'Size': '43', 'Quantity': 20},
+      {'Color': 'White/Magenta', 'Size': '44', 'Quantity': 15},
+      {'Color': 'White/Red', 'Size': '40', 'Quantity': 10},
+      {'Color': 'White/Red', 'Size': '41', 'Quantity': 15},
+      {'Color': 'White/Red', 'Size': '42', 'Quantity': 20},
+      {'Color': 'White/Red', 'Size': '43', 'Quantity': 20},
+      {'Color': 'White/Red', 'Size': '44', 'Quantity': 15},
+    ],
     categoryId: '7',
     brandId: 'nike',
     sale: 0.0,
@@ -211,16 +222,17 @@ final List<Product> products = [
     ],
     isFeatured: true,
     attributes: {
-      'Configuration': [
-        {'8GB/256GB': 15},
-        {'16GB/512GB': 10},
-        {'32GB/1TB': 5}
-      ],
-      'Color': [
-        {'Silver': 10},
-        {'Black': 20}
-      ],
+      'Configuration': ['8GB/256GB', '16GB/512GB', '32GB/1TB'],
+      'Color': ['Silver', 'Black'],
     },
+    variations: [
+      {'Configuration': '8GB/256GB', 'Color': 'Silver', 'Quantity': 10},
+      {'Configuration': '8GB/256GB', 'Color': 'Black', 'Quantity': 20},
+      {'Configuration': '16GB/512GB', 'Color': 'Silver', 'Quantity': 10},
+      {'Configuration': '16GB/512GB', 'Color': 'Black', 'Quantity': 20},
+      {'Configuration': '32GB/1TB', 'Color': 'Silver', 'Quantity': 5},
+      {'Configuration': '32GB/1TB', 'Color': 'Black', 'Quantity': 5},
+    ],
     categoryId: '19',
     brandId: 'acer',
     sale: 10.0,
@@ -242,18 +254,23 @@ final List<Product> products = [
     ],
     isFeatured: true,
     attributes: {
-      'Color': [
-        {'Red': 15},
-        {'Blue': 20},
-        {'Green': 10},
-        {'Black': 25}
-      ],
-      'Storage': [
-        {'128GB': 30},
-        {'256GB': 20},
-        {'512GB': 10}
-      ],
+      'Color': ['Red', 'Blue', 'Green', 'Black'],
+      'Storage': ['128GB', '256GB', '512GB'],
     },
+    variations: [
+      {'Color': 'Red', 'Storage': '128GB', 'Quantity': 30},
+      {'Color': 'Red', 'Storage': '256GB', 'Quantity': 20},
+      {'Color': 'Red', 'Storage': '512GB', 'Quantity': 10},
+      {'Color': 'Blue', 'Storage': '128GB', 'Quantity': 30},
+      {'Color': 'Blue', 'Storage': '256GB', 'Quantity': 20},
+      {'Color': 'Blue', 'Storage': '512GB', 'Quantity': 10},
+      {'Color': 'Green', 'Storage': '128GB', 'Quantity': 30},
+      {'Color': 'Green', 'Storage': '256GB', 'Quantity': 20},
+      {'Color': 'Green', 'Storage': '512GB', 'Quantity': 10},
+      {'Color': 'Black', 'Storage': '128GB', 'Quantity': 30},
+      {'Color': 'Black', 'Storage': '256GB', 'Quantity': 20},
+      {'Color': 'Black', 'Storage': '512GB', 'Quantity': 10},
+    ],
     categoryId: '18',
     brandId: 'apple',
     sale: 0.0,
@@ -275,19 +292,27 @@ final List<Product> products = [
     ],
     isFeatured: false,
     attributes: {
-      'Color': [
-        {'Red': 50},
-        {'Yellow': 30},
-        {'Green': 40},
-        {'Blue': 45}
-      ],
-      'Size': [
-        {'S': 20},
-        {'M': 30},
-        {'L': 25},
-        {'XL': 15}
-      ],
+      'Color': ['Red', 'Yellow', 'Green', 'Blue'],
+      'Size': ['S', 'M', 'L', 'XL'],
     },
+    variations: [
+      {'Color': 'Red', 'Size': 'S', 'Quantity': 20},
+      {'Color': 'Red', 'Size': 'M', 'Quantity': 30},
+      {'Color': 'Red', 'Size': 'L', 'Quantity': 25},
+      {'Color': 'Red', 'Size': 'XL', 'Quantity': 15},
+      {'Color': 'Yellow', 'Size': 'S', 'Quantity': 20},
+      {'Color': 'Yellow', 'Size': 'M', 'Quantity': 30},
+      {'Color': 'Yellow', 'Size': 'L', 'Quantity': 25},
+      {'Color': 'Yellow', 'Size': 'XL', 'Quantity': 15},
+      {'Color': 'Green', 'Size': 'S', 'Quantity': 20},
+      {'Color': 'Green', 'Size': 'M', 'Quantity': 30},
+      {'Color': 'Green', 'Size': 'L', 'Quantity': 25},
+      {'Color': 'Green', 'Size': 'XL', 'Quantity': 15},
+      {'Color': 'Blue', 'Size': 'S', 'Quantity': 20},
+      {'Color': 'Blue', 'Size': 'M', 'Quantity': 30},
+      {'Color': 'Blue', 'Size': 'L', 'Quantity': 25},
+      {'Color': 'Blue', 'Size': 'XL', 'Quantity': 15},
+    ],
     categoryId: '12',
     brandId: 'zara',
     sale: 0.0,
@@ -308,19 +333,27 @@ final List<Product> products = [
       ImageStrings.productImage67,
     ],
     attributes: {
-      'Color': [
-        {'Brown': 20},
-        {'Black': 25},
-        {'Tan': 15},
-        {'Dark Brown': 20}
-      ],
-      'Size': [
-        {'S': 15},
-        {'M': 25},
-        {'L': 20},
-        {'XL': 15}
-      ],
+      'Color': ['Brown', 'Black', 'Tan', 'Dark Brown'],
+      'Size': ['S', 'M', 'L', 'XL'],
     },
+    variations: [
+      {'Color': 'Brown', 'Size': 'S', 'Quantity': 15},
+      {'Color': 'Brown', 'Size': 'M', 'Quantity': 25},
+      {'Color': 'Brown', 'Size': 'L', 'Quantity': 20},
+      {'Color': 'Brown', 'Size': 'XL', 'Quantity': 15},
+      {'Color': 'Black', 'Size': 'S', 'Quantity': 15},
+      {'Color': 'Black', 'Size': 'M', 'Quantity': 25},
+      {'Color': 'Black', 'Size': 'L', 'Quantity': 20},
+      {'Color': 'Black', 'Size': 'XL', 'Quantity': 15},
+      {'Color': 'Tan', 'Size': 'S', 'Quantity': 15},
+      {'Color': 'Tan', 'Size': 'M', 'Quantity': 25},
+      {'Color': 'Tan', 'Size': 'L', 'Quantity': 20},
+      {'Color': 'Tan', 'Size': 'XL', 'Quantity': 15},
+      {'Color': 'Dark Brown', 'Size': 'S', 'Quantity': 15},
+      {'Color': 'Dark Brown', 'Size': 'M', 'Quantity': 25},
+      {'Color': 'Dark Brown', 'Size': 'L', 'Quantity': 20},
+      {'Color': 'Dark Brown', 'Size': 'XL', 'Quantity': 15},
+    ],
     categoryId: '2', // Fashion category
     brandId: 'zara',
     sale: 0.0,
@@ -340,17 +373,19 @@ final List<Product> products = [
       ImageStrings.productImage69,
     ],
     attributes: {
-      'Size': [
-        {'S': 30},
-        {'M': 40},
-        {'L': 35},
-        {'XL': 25}
-      ],
-      'Style': [
-        {'Front View': 65},
-        {'Back View': 65}
-      ],
+      'Size': ['S', 'M', 'L', 'XL'],
+      'Style': ['Front View', 'Back View'],
     },
+    variations: [
+      {'Size': 'S', 'Style': 'Front View', 'Quantity': 30},
+      {'Size': 'M', 'Style': 'Front View', 'Quantity': 40},
+      {'Size': 'L', 'Style': 'Front View', 'Quantity': 35},
+      {'Size': 'XL', 'Style': 'Front View', 'Quantity': 25},
+      {'Size': 'S', 'Style': 'Back View', 'Quantity': 30},
+      {'Size': 'M', 'Style': 'Back View', 'Quantity': 40},
+      {'Size': 'L', 'Style': 'Back View', 'Quantity': 35},
+      {'Size': 'XL', 'Style': 'Back View', 'Quantity': 25},
+    ],
     categoryId: '12', // T-Shirts category
     brandId: 'zara',
     sale: 10.0,
@@ -372,20 +407,31 @@ final List<Product> products = [
       ImageStrings.productImage77,
     ],
     attributes: {
-      'Style': [
-        {'Classic': 30},
-        {'Modern': 25},
-        {'Sport': 20},
-        {'Casual': 35}
-      ],
-      'Size': [
-        {'39': 15},
-        {'40': 20},
-        {'41': 25},
-        {'42': 20},
-        {'43': 15}
-      ],
+      'Style': ['Classic', 'Modern', 'Sport', 'Casual'],
+      'Size': ['39', '40', '41', '42', '43'],
     },
+    variations: [
+      {'Style': 'Classic', 'Size': '39', 'Quantity': 15},
+      {'Style': 'Classic', 'Size': '40', 'Quantity': 20},
+      {'Style': 'Classic', 'Size': '41', 'Quantity': 25},
+      {'Style': 'Classic', 'Size': '42', 'Quantity': 20},
+      {'Style': 'Classic', 'Size': '43', 'Quantity': 15},
+      {'Style': 'Modern', 'Size': '39', 'Quantity': 15},
+      {'Style': 'Modern', 'Size': '40', 'Quantity': 20},
+      {'Style': 'Modern', 'Size': '41', 'Quantity': 25},
+      {'Style': 'Modern', 'Size': '42', 'Quantity': 20},
+      {'Style': 'Modern', 'Size': '43', 'Quantity': 15},
+      {'Style': 'Sport', 'Size': '39', 'Quantity': 15},
+      {'Style': 'Sport', 'Size': '40', 'Quantity': 20},
+      {'Style': 'Sport', 'Size': '41', 'Quantity': 25},
+      {'Style': 'Sport', 'Size': '42', 'Quantity': 20},
+      {'Style': 'Sport', 'Size': '43', 'Quantity': 15},
+      {'Style': 'Casual', 'Size': '39', 'Quantity': 15},
+      {'Style': 'Casual', 'Size': '40', 'Quantity': 20},
+      {'Style': 'Casual', 'Size': '41', 'Quantity': 25},
+      {'Style': 'Casual', 'Size': '42', 'Quantity': 20},
+      {'Style': 'Casual', 'Size': '43', 'Quantity': 15},
+    ],
     categoryId: '7', // Shoes category
     brandId: 'nike',
     sale: 0.0,
@@ -405,18 +451,21 @@ final List<Product> products = [
       ImageStrings.productImage23,
     ],
     attributes: {
-      'Color': [
-        {'Green/Black': 25},
-        {'Blue/White': 20}
-      ],
-      'Size': [
-        {'40': 15},
-        {'41': 20},
-        {'42': 25},
-        {'43': 20},
-        {'44': 15}
-      ],
+      'Color': ['Green/Black', 'Blue/White'],
+      'Size': ['40', '41', '42', '43', '44'],
     },
+    variations: [
+      {'Color': 'Green/Black', 'Size': '40', 'Quantity': 15},
+      {'Color': 'Green/Black', 'Size': '41', 'Quantity': 20},
+      {'Color': 'Green/Black', 'Size': '42', 'Quantity': 25},
+      {'Color': 'Green/Black', 'Size': '43', 'Quantity': 20},
+      {'Color': 'Green/Black', 'Size': '44', 'Quantity': 15},
+      {'Color': 'Blue/White', 'Size': '40', 'Quantity': 15},
+      {'Color': 'Blue/White', 'Size': '41', 'Quantity': 20},
+      {'Color': 'Blue/White', 'Size': '42', 'Quantity': 25},
+      {'Color': 'Blue/White', 'Size': '43', 'Quantity': 20},
+      {'Color': 'Blue/White', 'Size': '44', 'Quantity': 15},
+    ],
     categoryId: '7', // Shoes category
     brandId: 'nike',
     sale: 15.0,
@@ -438,18 +487,23 @@ final List<Product> products = [
       ImageStrings.productImage46,
     ],
     attributes: {
-      'Color': [
-        {'Black': 10},
-        {'Grey': 15},
-        {'Brown': 12},
-        {'Light Brown': 8}
-      ],
-      'Size': [
-        {'King': 15},
-        {'Queen': 20},
-        {'Double': 25}
-      ],
+      'Color': ['Black', 'Grey', 'Brown', 'Light Brown'],
+      'Size': ['King', 'Queen', 'Double'],
     },
+    variations: [
+      {'Color': 'Black', 'Size': 'King', 'Quantity': 10},
+      {'Color': 'Black', 'Size': 'Queen', 'Quantity': 15},
+      {'Color': 'Black', 'Size': 'Double', 'Quantity': 25},
+      {'Color': 'Grey', 'Size': 'King', 'Quantity': 10},
+      {'Color': 'Grey', 'Size': 'Queen', 'Quantity': 15},
+      {'Color': 'Grey', 'Size': 'Double', 'Quantity': 25},
+      {'Color': 'Brown', 'Size': 'King', 'Quantity': 10},
+      {'Color': 'Brown', 'Size': 'Queen', 'Quantity': 15},
+      {'Color': 'Brown', 'Size': 'Double', 'Quantity': 25},
+      {'Color': 'Light Brown', 'Size': 'King', 'Quantity': 10},
+      {'Color': 'Light Brown', 'Size': 'Queen', 'Quantity': 15},
+      {'Color': 'Light Brown', 'Size': 'Double', 'Quantity': 25},
+    ],
     categoryId: '15', // Bedroom category
     brandId: 'ikea',
     sale: 10.0,
@@ -471,24 +525,63 @@ final List<Product> products = [
       ImageStrings.productImage53,
     ],
     attributes: {
-      'Model': [
-        {'Pro Max': 15},
-        {'Pro': 20},
-        {'Regular': 25}
-      ],
-      'Storage': [
-        {'128GB': 30},
-        {'256GB': 20},
-        {'512GB': 15},
-        {'1TB': 10}
-      ],
-      'Color': [
-        {'Space Black': 20},
-        {'Silver': 15},
-        {'Gold': 15},
-        {'White': 20}
-      ],
+      'Model': ['Pro Max', 'Pro', 'Regular'],
+      'Storage': ['128GB', '256GB', '512GB', '1TB'],
+      'Color': ['Space Black', 'Silver', 'Gold', 'White'],
     },
+    variations: [
+      {
+        'Model': 'Pro Max',
+        'Storage': '128GB',
+        'Color': 'Space Black',
+        'Quantity': 15
+      },
+      {
+        'Model': 'Pro Max',
+        'Storage': '256GB',
+        'Color': 'Space Black',
+        'Quantity': 15
+      },
+      {
+        'Model': 'Pro Max',
+        'Storage': '512GB',
+        'Color': 'Space Black',
+        'Quantity': 15
+      },
+      {
+        'Model': 'Pro Max',
+        'Storage': '1TB',
+        'Color': 'Space Black',
+        'Quantity': 15
+      },
+      {'Model': 'Pro', 'Storage': '128GB', 'Color': 'Silver', 'Quantity': 15},
+      {'Model': 'Pro', 'Storage': '256GB', 'Color': 'Silver', 'Quantity': 15},
+      {'Model': 'Pro', 'Storage': '512GB', 'Color': 'Silver', 'Quantity': 15},
+      {'Model': 'Pro', 'Storage': '1TB', 'Color': 'Silver', 'Quantity': 15},
+      {'Model': 'Regular', 'Storage': '128GB', 'Color': 'Gold', 'Quantity': 15},
+      {'Model': 'Regular', 'Storage': '256GB', 'Color': 'Gold', 'Quantity': 15},
+      {'Model': 'Regular', 'Storage': '512GB', 'Color': 'Gold', 'Quantity': 15},
+      {'Model': 'Regular', 'Storage': '1TB', 'Color': 'Gold', 'Quantity': 15},
+      {
+        'Model': 'Regular',
+        'Storage': '128GB',
+        'Color': 'White',
+        'Quantity': 15
+      },
+      {
+        'Model': 'Regular',
+        'Storage': '256GB',
+        'Color': 'White',
+        'Quantity': 15
+      },
+      {
+        'Model': 'Regular',
+        'Storage': '512GB',
+        'Color': 'White',
+        'Quantity': 15
+      },
+      {'Model': 'Regular', 'Storage': '1TB', 'Color': 'White', 'Quantity': 15},
+    ],
     categoryId: '18', // Mobiles category
     brandId: 'apple',
     sale: 0.0,
@@ -510,259 +603,66 @@ final List<Product> products = [
       ImageStrings.productImage50,
     ],
     attributes: {
-      'Model': [
-        {'Professional': 15},
-        {'Gaming': 20},
-        {'Student': 25}
-      ],
-      'Configuration': [
-        {'8GB/256GB': 20},
-        {'16GB/512GB': 15},
-        {'32GB/1TB': 10}
-      ],
-      'Color': [
-        {'Silver': 25},
-        {'Black': 20}
-      ],
+      'Model': ['Professional', 'Gaming', 'Student'],
+      'Configuration': ['8GB/256GB', '16GB/512GB', '32GB/1TB'],
+      'Color': ['Silver', 'Black'],
     },
-    categoryId: '19', // Laptops category
-    brandId: 'acer',
-    sale: 5.0,
-    rating: 4.5,
-    isFeatured: false,
-  ),
-  // Leather Jacket Collection
-  Product(
-    id: 'premium-leather-jacket',
-    title: 'Premium Leather Jacket',
-    description:
-        'Classic leather jacket with modern styling and premium quality materials',
-    price: 199.99,
-    thumbnail: ImageStrings.productImage64,
-    images: [
-      ImageStrings.productImage64,
-      ImageStrings.productImage65,
-      ImageStrings.productImage66,
-      ImageStrings.productImage67,
+    variations: [
+      {
+        'Model': 'Professional',
+        'Configuration': '8GB/256GB',
+        'Color': 'Silver',
+        'Quantity': 20
+      },
+      {
+        'Model': 'Professional',
+        'Configuration': '16GB/512GB',
+        'Color': 'Silver',
+        'Quantity': 15
+      },
+      {
+        'Model': 'Professional',
+        'Configuration': '32GB/1TB',
+        'Color': 'Silver',
+        'Quantity': 10
+      },
+      {
+        'Model': 'Gaming',
+        'Configuration': '8GB/256GB',
+        'Color': 'Black',
+        'Quantity': 20
+      },
+      {
+        'Model': 'Gaming',
+        'Configuration': '16GB/512GB',
+        'Color': 'Black',
+        'Quantity': 15
+      },
+      {
+        'Model': 'Gaming',
+        'Configuration': '32GB/1TB',
+        'Color': 'Black',
+        'Quantity': 10
+      },
+      {
+        'Model': 'Student',
+        'Configuration': '8GB/256GB',
+        'Color': 'Silver',
+        'Quantity': 20
+      },
+      {
+        'Model': 'Student',
+        'Configuration': '16GB/512GB',
+        'Color': 'Silver',
+        'Quantity': 15
+      },
+      {
+        'Model': 'Student',
+        'Configuration': '32GB/1TB',
+        'Color': 'Silver',
+        'Quantity': 10
+      },
     ],
-    attributes: {
-      'Color': [
-        {'Brown': 20},
-        {'Black': 25},
-        {'Tan': 15},
-        {'Dark Brown': 20}
-      ],
-      'Size': [
-        {'S': 15},
-        {'M': 25},
-        {'L': 20},
-        {'XL': 15}
-      ],
-    },
-    categoryId: '2', // Fashion category
-    brandId: 'zara',
-    sale: 0.0,
-    rating: 4.5,
-    isFeatured: false,
-  ),
-
-  // Blue T-Shirt Collection
-  Product(
-    id: 'casual-blue-tshirt',
-    title: 'Casual Blue T-Shirt',
-    description: 'Comfortable casual t-shirt with front and back design',
-    price: 24.99,
-    thumbnail: ImageStrings.productImage69,
-    images: [
-      ImageStrings.productImage68,
-      ImageStrings.productImage69,
-    ],
-    attributes: {
-      'Size': [
-        {'S': 30},
-        {'M': 40},
-        {'L': 35},
-        {'XL': 25}
-      ],
-      'Style': [
-        {'Front View': 65},
-        {'Back View': 65}
-      ],
-    },
-    categoryId: '12', // T-Shirts category
-    brandId: 'zara',
-    sale: 10.0,
-    rating: 4.2,
-    isFeatured: true,
-  ),
-
-  // Premium Slippers Collection
-  Product(
-    id: 'comfort-slippers-collection',
-    title: 'Comfort Slippers Collection',
-    description: 'Premium comfort slippers with various designs and colors',
-    price: 34.99,
-    thumbnail: ImageStrings.productImage74,
-    images: [
-      ImageStrings.productImage74,
-      ImageStrings.productImage75,
-      ImageStrings.productImage76,
-      ImageStrings.productImage77,
-    ],
-    attributes: {
-      'Style': [
-        {'Classic': 30},
-        {'Modern': 25},
-        {'Sport': 20},
-        {'Casual': 35}
-      ],
-      'Size': [
-        {'39': 15},
-        {'40': 20},
-        {'41': 25},
-        {'42': 20},
-        {'43': 15}
-      ],
-    },
-    categoryId: '7', // Shoes category
-    brandId: 'nike',
-    sale: 0.0,
-    rating: 4.3,
-    isFeatured: false,
-  ),
-
-  // Nike Basketball Shoe
-  Product(
-    id: 'nike-basketball-pro',
-    title: 'Nike Basketball Pro',
-    description: 'Professional basketball shoes with enhanced grip and comfort',
-    price: 159.99,
-    thumbnail: ImageStrings.productImage22,
-    images: [
-      ImageStrings.productImage22,
-      ImageStrings.productImage23,
-    ],
-    attributes: {
-      'Color': [
-        {'Green/Black': 25},
-        {'Blue/White': 20}
-      ],
-      'Size': [
-        {'40': 15},
-        {'41': 20},
-        {'42': 25},
-        {'43': 20},
-        {'44': 15}
-      ],
-    },
-    categoryId: '7', // Shoes category
-    brandId: 'nike',
-    sale: 15.0,
-    rating: 4.6,
-    isFeatured: true,
-  ),
-
-  // Bedroom Set Variants
-  Product(
-    id: 'luxury-bedroom-set',
-    title: 'Luxury Bedroom Set',
-    description: 'Premium bedroom set with multiple color options',
-    price: 1499.99,
-    thumbnail: ImageStrings.productImage43,
-    images: [
-      ImageStrings.productImage43,
-      ImageStrings.productImage44,
-      ImageStrings.productImage45,
-      ImageStrings.productImage46,
-    ],
-    attributes: {
-      'Color': [
-        {'Black': 10},
-        {'Grey': 15},
-        {'Brown': 12},
-        {'Light Brown': 8}
-      ],
-      'Size': [
-        {'King': 15},
-        {'Queen': 20},
-        {'Double': 25}
-      ],
-    },
-    categoryId: '15', // Bedroom category
-    brandId: 'ikea',
-    sale: 10.0,
-    rating: 4.7,
-    isFeatured: true,
-  ),
-
-  // iPhone 14 Series
-  Product(
-    id: 'iphone-14-series',
-    title: 'iPhone 14 Series',
-    description:
-        'Latest iPhone 14 with cutting-edge features and premium design',
-    price: 999.99,
-    thumbnail: ImageStrings.productImage52,
-    images: [
-      ImageStrings.productImage51,
-      ImageStrings.productImage52,
-      ImageStrings.productImage53,
-    ],
-    attributes: {
-      'Model': [
-        {'Pro Max': 15},
-        {'Pro': 20},
-        {'Regular': 25}
-      ],
-      'Storage': [
-        {'128GB': 30},
-        {'256GB': 20},
-        {'512GB': 15},
-        {'1TB': 10}
-      ],
-      'Color': [
-        {'Space Black': 20},
-        {'Silver': 15},
-        {'Gold': 15},
-        {'White': 20}
-      ],
-    },
-    categoryId: '18', // Mobiles category
-    brandId: 'apple',
-    sale: 0.0,
-    rating: 4.9,
-    isFeatured: true,
-  ),
-
-  // Acer Laptop Premium Series
-  Product(
-    id: 'acer-laptop-premium-series',
-    title: 'Acer Premium Laptop Series',
-    description: 'High-performance Acer laptops for professional use',
-    price: 1299.99,
-    thumbnail: ImageStrings.productImage47,
-    images: [
-      ImageStrings.productImage47,
-      ImageStrings.productImage48,
-      ImageStrings.productImage49,
-      ImageStrings.productImage50,
-    ],
-    attributes: {
-      'Model': [
-        {'Professional': 15},
-        {'Gaming': 20},
-        {'Student': 25}
-      ],
-      'Configuration': [
-        {'8GB/256GB': 20},
-        {'16GB/512GB': 15},
-        {'32GB/1TB': 10}
-      ],
-      'Color': [
-        {'Silver': 25},
-        {'Black': 20}
-      ],
-    },
     categoryId: '19', // Laptops category
     brandId: 'acer',
     sale: 5.0,
@@ -778,17 +678,20 @@ final List<Product> products = [
     thumbnail: ImageStrings.productImage18,
     images: [ImageStrings.productImage18],
     attributes: {
-      'Size': [
-        {'1kg': 30},
-        {'2.5kg': 25},
-        {'5kg': 20}
-      ],
-      'Type': [
-        {'Puppy': 25},
-        {'Adult': 30},
-        {'Senior': 20}
-      ],
+      'Size': ['1kg', '2.5kg', '5kg'],
+      'Type': ['Puppy', 'Adult', 'Senior'],
     },
+    variations: [
+      {'Size': '1kg', 'Type': 'Puppy', 'Quantity': 30},
+      {'Size': '2.5kg', 'Type': 'Puppy', 'Quantity': 25},
+      {'Size': '5kg', 'Type': 'Puppy', 'Quantity': 20},
+      {'Size': '1kg', 'Type': 'Adult', 'Quantity': 30},
+      {'Size': '2.5kg', 'Type': 'Adult', 'Quantity': 25},
+      {'Size': '5kg', 'Type': 'Adult', 'Quantity': 20},
+      {'Size': '1kg', 'Type': 'Senior', 'Quantity': 30},
+      {'Size': '2.5kg', 'Type': 'Senior', 'Quantity': 25},
+      {'Size': '5kg', 'Type': 'Senior', 'Quantity': 20},
+    ],
     categoryId: '8', // Animals category
     brandId: 'puma', // You might want to add a pet brand
     sale: 0.0,
@@ -805,18 +708,21 @@ final List<Product> products = [
     thumbnail: ImageStrings.productImage23,
     images: [ImageStrings.productImage23],
     attributes: {
-      'Size': [
-        {'40': 15},
-        {'41': 20},
-        {'42': 25},
-        {'43': 20},
-        {'44': 15}
-      ],
-      'Color': [
-        {'Green/Black': 45},
-        {'Grey/Black': 35}
-      ],
+      'Size': ['40', '41', '42', '43', '44'],
+      'Color': ['Green/Black', 'Grey/Black'],
     },
+    variations: [
+      {'Size': '40', 'Color': 'Green/Black', 'Quantity': 15},
+      {'Size': '41', 'Color': 'Green/Black', 'Quantity': 20},
+      {'Size': '42', 'Color': 'Green/Black', 'Quantity': 25},
+      {'Size': '43', 'Color': 'Green/Black', 'Quantity': 20},
+      {'Size': '44', 'Color': 'Green/Black', 'Quantity': 15},
+      {'Size': '40', 'Color': 'Grey/Black', 'Quantity': 15},
+      {'Size': '41', 'Color': 'Grey/Black', 'Quantity': 20},
+      {'Size': '42', 'Color': 'Grey/Black', 'Quantity': 25},
+      {'Size': '43', 'Color': 'Grey/Black', 'Quantity': 20},
+      {'Size': '44', 'Color': 'Grey/Black', 'Quantity': 15},
+    ],
     categoryId: '9', // Running Shoes category
     brandId: 'nike',
     sale: 0.0,
@@ -833,17 +739,19 @@ final List<Product> products = [
     thumbnail: ImageStrings.productImage3,
     images: [ImageStrings.productImage3],
     attributes: {
-      'Size': [
-        {'S': 20},
-        {'M': 25},
-        {'L': 20},
-        {'XL': 15}
-      ],
-      'Color': [
-        {'Brown': 40},
-        {'Black': 40}
-      ],
+      'Size': ['S', 'M', 'L', 'XL'],
+      'Color': ['Brown', 'Black'],
     },
+    variations: [
+      {'Size': 'S', 'Color': 'Brown', 'Quantity': 20},
+      {'Size': 'M', 'Color': 'Brown', 'Quantity': 25},
+      {'Size': 'L', 'Color': 'Brown', 'Quantity': 20},
+      {'Size': 'XL', 'Color': 'Brown', 'Quantity': 15},
+      {'Size': 'S', 'Color': 'Black', 'Quantity': 20},
+      {'Size': 'M', 'Color': 'Black', 'Quantity': 25},
+      {'Size': 'L', 'Color': 'Black', 'Quantity': 20},
+      {'Size': 'XL', 'Color': 'Black', 'Quantity': 15},
+    ],
     categoryId: '2', // Fashion category
     brandId: 'zara',
     sale: 0.0,
@@ -860,17 +768,19 @@ final List<Product> products = [
     thumbnail: ImageStrings.productImage4,
     images: [ImageStrings.productImage4],
     attributes: {
-      'Size': [
-        {'30': 20},
-        {'32': 25},
-        {'34': 20},
-        {'36': 15}
-      ],
-      'Style': [
-        {'Slim': 40},
-        {'Regular': 40}
-      ],
+      'Size': ['30', '32', '34', '36'],
+      'Style': ['Slim', 'Regular'],
     },
+    variations: [
+      {'Size': '30', 'Style': 'Slim', 'Quantity': 20},
+      {'Size': '32', 'Style': 'Slim', 'Quantity': 25},
+      {'Size': '34', 'Style': 'Slim', 'Quantity': 20},
+      {'Size': '36', 'Style': 'Slim', 'Quantity': 15},
+      {'Size': '30', 'Style': 'Regular', 'Quantity': 20},
+      {'Size': '32', 'Style': 'Regular', 'Quantity': 25},
+      {'Size': '34', 'Style': 'Regular', 'Quantity': 20},
+      {'Size': '36', 'Style': 'Regular', 'Quantity': 15},
+    ],
     categoryId: '14', // Jeans category
     brandId: 'zara',
     sale: 0.0,
@@ -887,17 +797,19 @@ final List<Product> products = [
     thumbnail: ImageStrings.productImage5,
     images: [ImageStrings.productImage5],
     attributes: {
-      'Size': [
-        {'S': 25},
-        {'M': 30},
-        {'L': 25},
-        {'XL': 20}
-      ],
-      'Color': [
-        {'White': 50},
-        {'Light Blue': 50}
-      ],
+      'Size': ['S', 'M', 'L', 'XL'],
+      'Color': ['White', 'Light Blue'],
     },
+    variations: [
+      {'Size': 'S', 'Color': 'White', 'Quantity': 25},
+      {'Size': 'M', 'Color': 'White', 'Quantity': 30},
+      {'Size': 'L', 'Color': 'White', 'Quantity': 25},
+      {'Size': 'XL', 'Color': 'White', 'Quantity': 20},
+      {'Size': 'S', 'Color': 'Light Blue', 'Quantity': 25},
+      {'Size': 'M', 'Color': 'Light Blue', 'Quantity': 30},
+      {'Size': 'L', 'Color': 'Light Blue', 'Quantity': 25},
+      {'Size': 'XL', 'Color': 'Light Blue', 'Quantity': 20},
+    ],
     categoryId: '13', // Shirts category
     brandId: 'zara',
     sale: 5.0,
@@ -914,18 +826,21 @@ final List<Product> products = [
     thumbnail: ImageStrings.productImage6,
     images: [ImageStrings.productImage6],
     attributes: {
-      'Size': [
-        {'39': 20},
-        {'40': 25},
-        {'41': 25},
-        {'42': 20},
-        {'43': 15}
-      ],
-      'Color': [
-        {'Brown': 55},
-        {'Black': 45}
-      ],
+      'Size': ['39', '40', '41', '42', '43'],
+      'Color': ['Brown', 'Black'],
     },
+    variations: [
+      {'Size': '39', 'Color': 'Brown', 'Quantity': 20},
+      {'Size': '40', 'Color': 'Brown', 'Quantity': 25},
+      {'Size': '41', 'Color': 'Brown', 'Quantity': 25},
+      {'Size': '42', 'Color': 'Brown', 'Quantity': 20},
+      {'Size': '43', 'Color': 'Brown', 'Quantity': 15},
+      {'Size': '39', 'Color': 'Black', 'Quantity': 20},
+      {'Size': '40', 'Color': 'Black', 'Quantity': 25},
+      {'Size': '41', 'Color': 'Black', 'Quantity': 25},
+      {'Size': '42', 'Color': 'Black', 'Quantity': 20},
+      {'Size': '43', 'Color': 'Black', 'Quantity': 15},
+    ],
     categoryId: '7', // Shoes category
     brandId: 'nike',
     sale: 0.0,
@@ -942,17 +857,19 @@ final List<Product> products = [
     thumbnail: ImageStrings.productImage2,
     images: [ImageStrings.productImage2],
     attributes: {
-      'Size': [
-        {'S': 20},
-        {'M': 25},
-        {'L': 20},
-        {'XL': 15}
-      ],
-      'Color': [
-        {'Blue': 40},
-        {'Black': 40}
-      ],
+      'Size': ['S', 'M', 'L', 'XL'],
+      'Color': ['Blue', 'Black'],
     },
+    variations: [
+      {'Size': 'S', 'Color': 'Blue', 'Quantity': 20},
+      {'Size': 'M', 'Color': 'Blue', 'Quantity': 25},
+      {'Size': 'L', 'Color': 'Blue', 'Quantity': 20},
+      {'Size': 'XL', 'Color': 'Blue', 'Quantity': 15},
+      {'Size': 'S', 'Color': 'Black', 'Quantity': 20},
+      {'Size': 'M', 'Color': 'Black', 'Quantity': 25},
+      {'Size': 'L', 'Color': 'Black', 'Quantity': 20},
+      {'Size': 'XL', 'Color': 'Black', 'Quantity': 15},
+    ],
     categoryId: '2', // Fashion category
     brandId: 'zara',
     sale: 0.0,

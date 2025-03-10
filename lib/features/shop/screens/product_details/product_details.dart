@@ -20,6 +20,11 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Initialize the controller with this product
+    final controller = Get.put(AttributeSellector());
+    // Set the product variations for availability checks
+    controller.setVariations(product.variations);
+
     return Scaffold(
       bottomNavigationBar: BottomAddToCart(),
       body: SingleChildScrollView(
@@ -51,7 +56,7 @@ class ProductDetails extends StatelessWidget {
                               text: product.rating.toString(),
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyLarge!
+                                  .titleMedium!
                                   .copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -77,7 +82,7 @@ class ProductDetails extends StatelessWidget {
                     height: 10,
                   ),
                   ProductAttribute(
-                    attributes: product.attributes,
+                    product: product,
                   ),
                   SizedBox(
                     height: 20,

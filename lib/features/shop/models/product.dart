@@ -8,7 +8,8 @@ class Product {
   final String thumbnail;
   final List<dynamic> images;
   final bool isFeatured;
-  final Map<String, List<Map<String, dynamic>>> attributes;
+  final Map<String, List<String>> attributes;
+  final List<Map<String, dynamic>> variations;
   final String categoryId;
   final String brandId;
   final double sale;
@@ -23,6 +24,7 @@ class Product {
       required this.images,
       required this.isFeatured,
       required this.attributes,
+      required this.variations,
       required this.categoryId,
       required this.brandId,
       required this.sale,
@@ -38,6 +40,7 @@ class Product {
         images: [],
         isFeatured: false,
         attributes: {},
+        variations: [],
         categoryId: '',
         brandId: '',
         sale: 0.0,
@@ -54,6 +57,7 @@ class Product {
       'images': images,
       'isFeatured': isFeatured,
       'attributes': attributes,
+      'variations': variations,
       'categoryId': categoryId,
       'brandId': brandId,
       'sale': sale,
@@ -72,22 +76,18 @@ class Product {
         description: json['description'] ?? '',
         price: (json['price'] ?? 0.0).toDouble(),
         thumbnail: json['thumbnail'] ?? '',
-        // Fix the list casting
         images: (json['images'] as List<dynamic>?)
                 ?.map((e) => e.toString())
                 .toList() ??
             [],
         isFeatured: json['isFeatured'] ?? false,
-        // Updated attributes casting to handle the new structure
         attributes: (json['attributes'] as Map<String, dynamic>?)?.map(
-              (key, value) => MapEntry(
-                key,
-                (value as List<dynamic>)
-                    .map((item) => (item as Map<String, dynamic>))
-                    .toList(),
-              ),
-            ) ??
+                (key, value) => MapEntry(key, List<String>.from(value))) ??
             {},
+        variations: (json['variations'] as List<dynamic>?)
+                ?.map((item) => item as Map<String, dynamic>)
+                .toList() ??
+            [],
         categoryId: json['categoryId'] ?? '',
         brandId: json['brandId'] ?? '',
         sale: (json['sale'] ?? 0.0).toDouble(),

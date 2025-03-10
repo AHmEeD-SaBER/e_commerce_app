@@ -9,7 +9,8 @@ class CircularIcon extends StatelessWidget {
       this.backGroundColor,
       this.height,
       this.width,
-      this.iconSize});
+      this.iconSize,
+      this.disabled = false});
   final IconData icon;
   final VoidCallback onPressed;
   final Color? iconColor;
@@ -17,6 +18,7 @@ class CircularIcon extends StatelessWidget {
   final double? height;
   final double? width;
   final double? iconSize;
+  final bool disabled;
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +26,18 @@ class CircularIcon extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
-        color: backGroundColor ?? Colors.transparent,
+        color: disabled
+            ? (backGroundColor ?? Colors.grey).withOpacity(0.5)
+            : backGroundColor ?? Colors.transparent,
         borderRadius: BorderRadius.circular(100),
       ),
       child: IconButton(
-        onPressed: onPressed,
+        onPressed: disabled ? null : onPressed,
         icon: Icon(
           icon,
-          color: iconColor,
+          color: disabled
+              ? (iconColor ?? Colors.grey).withOpacity(0.5)
+              : iconColor,
           size: iconSize,
         ),
       ),

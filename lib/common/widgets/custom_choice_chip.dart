@@ -4,10 +4,17 @@ import 'package:flutter/material.dart';
 
 class CustomChoiceChip extends StatelessWidget {
   const CustomChoiceChip(
-      {super.key, required this.label, required this.selected, this.onTap});
+      {super.key,
+      required this.label,
+      required this.selected,
+      this.onTap,
+      this.isEnabled = true});
+
   final String label;
   final bool selected;
   final Function(bool)? onTap;
+  final bool isEnabled;
+
   @override
   Widget build(BuildContext context) {
     return Helper.getColorFromText(label) != null
@@ -16,12 +23,15 @@ class CustomChoiceChip extends StatelessWidget {
             child: ChoiceChip(
               label: Text(''),
               selected: selected,
-              onSelected: onTap,
-              labelStyle: TextStyle(color: selected ? Colors.white : null),
+              onSelected: isEnabled ? onTap : null,
+              labelStyle: TextStyle(
+                  color: selected ? const Color.fromARGB(255, 0, 0, 0) : null),
               avatar: CircleContainer(
                 width: 50,
                 heigt: 50,
-                color: Helper.getColorFromText(label)!,
+                color: isEnabled
+                    ? Helper.getColorFromText(label)!
+                    : Helper.getColorFromText(label)!.withOpacity(0.3),
                 padding: 5,
               ),
               shape: CircleBorder(),
@@ -29,14 +39,23 @@ class CustomChoiceChip extends StatelessWidget {
               backgroundColor: Colors.transparent,
               padding: EdgeInsets.all(0),
               selectedColor: Colors.green,
+              disabledColor: Colors.grey.withOpacity(0.1),
             ),
           )
         : Theme(
             data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
             child: ChoiceChip(
-              label: Text(label),
+              label: Text(label,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: selected
+                            ? Colors.black
+                            : isEnabled
+                                ? null
+                                : Colors.grey,
+                      )),
               selected: selected,
-              onSelected: onTap,
+              onSelected: isEnabled ? onTap : null,
+              disabledColor: Colors.grey.withOpacity(0.1),
             ),
           );
   }

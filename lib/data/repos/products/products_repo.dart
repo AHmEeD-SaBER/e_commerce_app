@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/features/shop/models/product.dart';
+import 'package:e_commerce_app/utils/constants/image_strings.dart';
 import 'package:e_commerce_app/utils/popups/loader.dart';
 import 'package:get/get.dart';
 
@@ -131,4 +132,13 @@ class ProductsRepo extends GetxController {
       return false;
     }
   }
+
+  // @override
+  // void onInit() async {
+  //   // TODO: implement onInit
+  //   super.onInit();
+  //   for (final product in products) {
+  //     await _db.collection('products').doc(product.id).set(product.toJson());
+  //   }
+  // }
 }

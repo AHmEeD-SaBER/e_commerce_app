@@ -92,6 +92,18 @@ class Helper {
       'indigo': Colors.indigo,
       'lime': Colors.lime,
       'amber': Colors.amber,
+      'black/red': Colors.red[900] ?? Colors.red,
+      'white/magenta': Colors.pink[100] ?? Colors.pink,
+      'white/red': Colors.red[100] ?? Colors.red,
+      'silver': Colors.grey[300] ?? Colors.grey,
+      'space black': Colors.black,
+      'light blue': Colors.lightBlue,
+      'dark brown': Colors.brown[800] ?? Colors.brown,
+      'green/black': Colors.green[900] ?? Colors.green,
+      'grey/black': Colors.grey[800] ?? Colors.grey,
+      'blue/white': Colors.blue[100] ?? Colors.blue,
+      'tan': Colors.brown[300] ?? Colors.brown,
+      'gold': Colors.amber[700] ?? Colors.amber,
     };
 
     // Return the color if it exists in the map, otherwise return null
