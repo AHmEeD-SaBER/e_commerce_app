@@ -133,6 +133,26 @@ class ProductsRepo extends GetxController {
     }
   }
 
+  Future<void> updateAmmountInStock(
+      String productId,
+      Map<String, dynamic> oldVariation,
+      Map<String, dynamic> newVariation) async {
+    try {
+      // First, remove the old variation
+      await _db.collection('products').doc(productId).update({
+        'variations': FieldValue.arrayRemove([oldVariation])
+      });
+
+      // Then, add the updated variation
+      await _db.collection('products').doc(productId).update({
+        'variations': FieldValue.arrayUnion([newVariation])
+      });
+    } catch (e) {
+      Loader.errorSnackbar(title: 'Error', message: e.toString());
+      rethrow;
+    }
+  }
+
   // @override
   // void onInit() async {
   //   // TODO: implement onInit

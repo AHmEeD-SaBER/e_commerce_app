@@ -4,7 +4,6 @@ import 'package:e_commerce_app/common/widgets/curved_image_container.dart';
 import 'package:e_commerce_app/common/widgets/product_price.dart';
 import 'package:e_commerce_app/common/widgets/product_title.dart';
 import 'package:e_commerce_app/common/widgets/sale_container.dart';
-import 'package:e_commerce_app/features/personalization/controllers/user_controller.dart';
 import 'package:e_commerce_app/features/shop/controllers/brand_controller.dart';
 import 'package:e_commerce_app/features/shop/controllers/products_controller.dart';
 import 'package:e_commerce_app/features/shop/models/brand.dart';

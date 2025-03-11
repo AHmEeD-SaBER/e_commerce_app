@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 7),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               child: AutoSlider(
                 images: [
                   'assets/images/sales/sale1.jpeg',

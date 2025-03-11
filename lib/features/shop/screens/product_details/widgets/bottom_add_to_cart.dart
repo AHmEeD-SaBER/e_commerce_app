@@ -1,5 +1,5 @@
 import 'package:e_commerce_app/common/widgets/circular_icon.dart';
-import 'package:e_commerce_app/features/shop/screens/product_details/widgets/product_attribute.dart';
+import 'package:e_commerce_app/features/shop/controllers/attribute_sellector.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
 import 'package:e_commerce_app/utils/device/device_utility.dart';
 import 'package:e_commerce_app/utils/helpers/helper.dart';
@@ -84,10 +84,8 @@ class BottomAddToCart extends StatelessWidget {
 
             return ElevatedButton.icon(
               onPressed: isAvailable && !isAddingToCart
-                  ? () {
-                      controller.addToCart();
-                      Helper.showSnackBar(
-                          context, 'Added to cart successfully!');
+                  ? () async {
+                      await controller.addToCart();
                     }
                   : null,
               style: ElevatedButton.styleFrom(

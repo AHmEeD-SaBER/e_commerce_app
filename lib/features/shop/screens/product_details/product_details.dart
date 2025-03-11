@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/features/shop/controllers/attribute_sellector.dart';
 import 'package:e_commerce_app/features/shop/models/brand.dart';
 import 'package:e_commerce_app/features/shop/models/product.dart';
 import 'package:e_commerce_app/features/shop/screens/product_details/widgets/bottom_add_to_cart.dart';
@@ -24,6 +25,8 @@ class ProductDetails extends StatelessWidget {
     final controller = Get.put(AttributeSellector());
     // Set the product variations for availability checks
     controller.setVariations(product.variations);
+    // Set the current product ID
+    controller.setCurrentProductId(product.id);
 
     return Scaffold(
       bottomNavigationBar: BottomAddToCart(),

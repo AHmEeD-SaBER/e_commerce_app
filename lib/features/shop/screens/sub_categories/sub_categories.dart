@@ -4,9 +4,8 @@ import 'package:e_commerce_app/common/widgets/product_card_horizontal.dart';
 import 'package:e_commerce_app/common/widgets/section_heading.dart';
 import 'package:e_commerce_app/features/shop/controllers/categories_controller.dart';
 import 'package:e_commerce_app/features/shop/controllers/products_controller.dart';
-import 'package:e_commerce_app/features/shop/models/brand.dart';
 import 'package:e_commerce_app/features/shop/models/category.dart';
-import 'package:e_commerce_app/utils/constants/image_strings.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
