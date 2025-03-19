@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/features/shop/controllers/attribute_sellector.dart';
+import 'package:e_commerce_app/features/shop/controllers/reviews_controller.dart';
 import 'package:e_commerce_app/features/shop/models/brand.dart';
 import 'package:e_commerce_app/features/shop/models/product.dart';
 import 'package:e_commerce_app/features/shop/screens/product_details/widgets/bottom_add_to_cart.dart';
@@ -6,6 +7,7 @@ import 'package:e_commerce_app/features/shop/screens/product_details/widgets/pro
 import 'package:e_commerce_app/features/shop/screens/product_details/widgets/product_images_slider.dart';
 import 'package:e_commerce_app/features/shop/screens/product_details/widgets/product_meta_data.dart';
 import 'package:e_commerce_app/common/widgets/section_heading.dart';
+import 'package:e_commerce_app/features/shop/screens/reviews/add_review.dart';
 import 'package:e_commerce_app/features/shop/screens/reviews/product_reviews.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
 import 'package:e_commerce_app/utils/device/device_utility.dart';
@@ -21,6 +23,8 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final reviewsController = Get.put(ReviewsController());
+    reviewsController.getReviews(product.id);
     // Initialize the controller with this product
     final controller = Get.put(AttributeSellector());
     // Set the product variations for availability checks
@@ -65,15 +69,22 @@ class ProductDetails extends StatelessWidget {
                                   ),
                             ),
                             TextSpan(
-                              text: " (200 Reviews)",
+                              text:
+                                  " (${reviewsController.reviews.length}) Reviews",
                             ),
                           ],
                         ),
                       ),
                       Spacer(),
                       IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.share),
+                        onPressed: () {
+                          Get.to(() => AddReview());
+                        },
+                        icon: Icon(
+                          Icons.rate_review,
+                          color: CustomColors.primaryColor,
+                          size: 28,
+                        ),
                       ),
                     ],
                   ),
@@ -140,14 +151,18 @@ class ProductDetails extends StatelessWidget {
                   Row(
                     children: [
                       SectionHeading(
-                        title: 'Reviews (199)',
+                        title:
+                            'Reviews (${reviewsController.getTotalReviews(product.id)})',
                         showActionBtn: false,
                         blacBackGround: true,
                       ),
                       Spacer(),
                       IconButton(
                           onPressed: () {
-                            Get.to(() => ProductReviews());
+                            Get.to(() => ProductReviews(
+                                  reviews: reviewsController.reviews,
+                                  rating: product.rating,
+                                ));
                           },
                           icon: Icon(
                             Iconsax.arrow_right_3,

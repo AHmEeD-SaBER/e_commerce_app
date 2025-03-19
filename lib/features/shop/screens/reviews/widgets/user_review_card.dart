@@ -1,32 +1,22 @@
+import 'package:e_commerce_app/features/shop/controllers/reviews_controller.dart';
+import 'package:e_commerce_app/features/shop/models/review.dart';
 import 'package:e_commerce_app/features/shop/screens/reviews/product_reviews.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
 import 'package:e_commerce_app/utils/device/device_utility.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
 
 class UserReviewCard extends StatelessWidget {
-  const UserReviewCard(
-      {super.key,
-      required this.review,
-      required this.date,
-      required this.sellerName,
-      required this.sellerReview,
-      required this.sellerReviewDate,
-      required this.userName,
-      required this.rating,
-      this.onInfoPressed,
-      this.userImage,
-      this.isResponse = false});
-  final String review;
-  final String date;
-  final String sellerName;
-  final String sellerReview;
-  final String sellerReviewDate;
-  final String userName;
-  final String? userImage;
-  final double rating;
-  final bool isResponse;
+  const UserReviewCard({
+    super.key,
+    required this.review,
+    this.onInfoPressed,
+    required this.isResponse,
+  });
+  final Review review;
   final VoidCallback? onInfoPressed;
+  final bool isResponse;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -38,14 +28,13 @@ class UserReviewCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundColor: CustomColors.darkGrey,
-                  backgroundImage:
-                      AssetImage(userImage ?? 'assets/images/user.png'),
+                  backgroundImage: AssetImage('assets/images/user.png'),
                 ),
                 SizedBox(
                   width: 10,
                 ),
                 Text(
-                  userName,
+                  review.userName,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               ],
@@ -66,12 +55,12 @@ class UserReviewCard extends StatelessWidget {
         ),
         Row(
           children: [
-            CustomRatingBar(rating: rating),
+            CustomRatingBar(rating: review.rating.toDouble()),
             SizedBox(
               width: 10,
             ),
             Text(
-              date,
+              review.date,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
@@ -80,7 +69,7 @@ class UserReviewCard extends StatelessWidget {
           height: 10,
         ),
         ReadMoreText(
-          review,
+          review.review,
           trimLines: 3,
           trimMode: TrimMode.Line,
           trimCollapsedText: 'Read more',
@@ -91,7 +80,8 @@ class UserReviewCard extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        Container(
+        if (isResponse && review.sellerReview != null)
+          Container(
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
@@ -106,11 +96,11 @@ class UserReviewCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      sellerName,
+                      review.sellerReview!.userName,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Text(
-                      sellerReviewDate,
+                      review.sellerReview!.date,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -119,7 +109,7 @@ class UserReviewCard extends StatelessWidget {
                   height: 10,
                 ),
                 ReadMoreText(
-                  sellerReview,
+                  review.sellerReview!.review,
                   trimLines: 2,
                   trimMode: TrimMode.Line,
                   trimCollapsedText: 'Read more',
@@ -134,7 +124,8 @@ class UserReviewCard extends StatelessWidget {
                       .copyWith(color: CustomColors.primaryColor),
                 ),
               ],
-            )),
+            ),
+          ),
       ],
     );
   }

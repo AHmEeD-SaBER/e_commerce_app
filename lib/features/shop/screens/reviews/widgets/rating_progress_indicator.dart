@@ -29,7 +29,7 @@ class RatingProgressIndicator extends StatelessWidget {
               value: value,
               minHeight: 11,
               borderRadius: BorderRadius.circular(7),
-              backgroundColor: Colors.grey[300],
+              backgroundColor: CustomColors.darkGrey,
               valueColor:
                   AlwaysStoppedAnimation<Color>(CustomColors.primaryColor),
             ),

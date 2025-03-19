@@ -130,9 +130,9 @@ class ProductCardVertical extends StatelessWidget {
                     BrandContainer(
                       brand: brand,
                     ),
-                    // Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Flexible(
                           child: ProductPrice(
@@ -141,25 +141,27 @@ class ProductCardVertical extends StatelessWidget {
                             currency: '\$',
                           ),
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: DeviceUtility.isDarkMood(context)
-                                ? CustomColors.darkGrey
-                                : CustomColors.black,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              bottomRight: Radius.circular(15),
+                        Flexible(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: DeviceUtility.isDarkMood(context)
+                                  ? CustomColors.darkGrey
+                                  : CustomColors.black,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                bottomRight: Radius.circular(15),
+                              ),
                             ),
-                          ),
-                          child: SizedBox(
-                            width: 40,
-                            height: 40,
-                            child: Center(
-                              child: Icon(
-                                Iconsax.add,
-                                color: DeviceUtility.isDarkMood(context)
-                                    ? Colors.black
-                                    : CustomColors.white,
+                            child: SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: Center(
+                                child: Icon(
+                                  Iconsax.add,
+                                  color: DeviceUtility.isDarkMood(context)
+                                      ? Colors.black
+                                      : CustomColors.white,
+                                ),
                               ),
                             ),
                           ),

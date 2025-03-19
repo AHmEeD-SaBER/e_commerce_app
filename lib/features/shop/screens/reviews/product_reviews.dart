@@ -1,18 +1,34 @@
 import 'package:e_commerce_app/common/widgets/appbar/appbar.dart';
+import 'package:e_commerce_app/features/personalization/controllers/user_controller.dart';
+import 'package:e_commerce_app/features/shop/controllers/reviews_controller.dart';
+import 'package:e_commerce_app/features/shop/models/review.dart';
 import 'package:e_commerce_app/features/shop/screens/reviews/widgets/rating_progress_indicator.dart';
 import 'package:e_commerce_app/features/shop/screens/reviews/widgets/user_review_card.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProductReviews extends StatelessWidget {
-  const ProductReviews({super.key});
+  const ProductReviews(
+      {super.key, required this.reviews, required this.rating});
+  final List<Review> reviews;
+  final double rating;
 
   @override
   Widget build(BuildContext context) {
+    print('reviews: $reviews');
+    final userController = Get.put(UserController());
+    final reviewsController = Get.put(ReviewsController());
+    reviewsController.getRatingMap();
+    for (final entry in reviewsController.ratingMap.entries) {
+      print(entry.key);
+      print(entry.value);
+    }
     return Scaffold(
       appBar: CustomAppbar(
         title:
@@ -36,7 +52,7 @@ class ProductReviews extends StatelessWidget {
                 children: [
                   Expanded(
                       flex: 3,
-                      child: Text('4.5',
+                      child: Text(rating.toString(),
                           style: Theme.of(context).textTheme.displayLarge)),
                   Expanded(
                     flex: 7,
@@ -44,23 +60,28 @@ class ProductReviews extends StatelessWidget {
                       children: [
                         RatingProgressIndicator(
                           rating: '5',
-                          value: 0.8,
+                          value: (reviewsController.ratingMap[5] ?? 0) /
+                              reviewsController.reviews.length,
                         ),
                         RatingProgressIndicator(
                           rating: '4',
-                          value: 0.7,
+                          value: (reviewsController.ratingMap[4] ?? 0) /
+                              reviewsController.reviews.length,
                         ),
                         RatingProgressIndicator(
                           rating: '3',
-                          value: 0.6,
+                          value: (reviewsController.ratingMap[3] ?? 0) /
+                              reviewsController.reviews.length,
                         ),
                         RatingProgressIndicator(
                           rating: '2',
-                          value: 0.5,
+                          value: (reviewsController.ratingMap[2] ?? 0) /
+                              reviewsController.reviews.length,
                         ),
                         RatingProgressIndicator(
                           rating: '1',
-                          value: 0.4,
+                          value: (reviewsController.ratingMap[1] ?? 0) /
+                              reviewsController.reviews.length,
                         ),
                       ],
                     ),
@@ -74,7 +95,7 @@ class ProductReviews extends StatelessWidget {
                 height: 5,
               ),
               Text(
-                '12,611',
+                reviewsController.reviews.length.toString(),
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               SizedBox(
@@ -86,16 +107,11 @@ class ProductReviews extends StatelessWidget {
                   child: Column(
                     children: [
                       UserReviewCard(
-                          review:
-                              'This is a very good product. I am very happy with the product. I will recommend this product to my friends and family. This is a very good product. I am very happy with the product. I will recommend this product to my friends and family.',
-                          isResponse: true,
-                          sellerName: 'Seller',
-                          userName: 'Ahmed Saber',
-                          rating: 4.5,
-                          date: '12/12/2021',
-                          sellerReview:
-                              'Thank you for your review. We are happy that you are satisfied with our product. We hope to see you again. Thank you for your review. We are happy that you are satisfied with our product. We hope to see you again.',
-                          sellerReviewDate: '12/12/2021'),
+                        review: reviewsController.reviews[indx],
+                        isResponse:
+                            reviewsController.reviews[indx].sellerReview !=
+                                null,
+                      ),
                       SizedBox(
                         height: 20,
                       ),
@@ -103,7 +119,7 @@ class ProductReviews extends StatelessWidget {
                     ],
                   ),
                 ),
-                itemCount: 5,
+                itemCount: reviewsController.reviews.length,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
               )

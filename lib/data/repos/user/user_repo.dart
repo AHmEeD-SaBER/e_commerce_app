@@ -62,4 +62,17 @@ class UserRepo extends GetxController {
       rethrow;
     }
   }
+
+  Future<String> getUserName(String userId) async {
+    try {
+      final user = await _db.collection('users').doc(userId).get();
+      return user.data()?['userName'] ?? '';
+    } on FirebaseException catch (e) {
+      Loader.errorSnackbar(title: 'Error', message: e.message ?? 'Error');
+      rethrow;
+    } catch (e) {
+      Loader.errorSnackbar(title: 'Error', message: e.toString());
+      rethrow;
+    }
+  }
 }
